@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>用户中心 · 学段与微信设置</title>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --line: #dedcd1;
+      --text: #141413;
+      --muted: #605e57;
+      --accent: #a84f35;
+      --accent-strong: #8f402b;
+      --ok: #087f5b;
+      --danger: #b42318;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 600px at 8% -10%, #f4e8df 0%, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-underline-offset: 4px; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 22px 24px 0;
+    }
+    .back { color: var(--muted); font-size: 13.5px; text-decoration: none; }
+    .back:hover { color: var(--accent); }
+    .brand { font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--accent); }
+    .wrap {
+      width: min(920px, calc(100% - 32px));
+      margin: 22px auto 56px;
+      display: grid;
+      gap: 18px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: clamp(20px, 4vw, 34px);
+      box-shadow: 0 20px 55px rgba(81, 75, 52, .07);
+    }
+    .profile { display: flex; align-items: center; gap: 18px; }
+    .avatar {
+      flex: 0 0 auto;
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 700;
+      background: linear-gradient(145deg, #c97958, #8f402b);
+      box-shadow: 0 10px 24px rgba(143, 64, 43, .22);
+    }
+    .eyebrow {
+      margin: 0 0 2px;
+      color: var(--accent);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .16em;
+    }
+    h1 { margin: 0; font-size: clamp(23px, 4vw, 30px); line-height: 1.35; letter-spacing: -.02em; }
+    h2 { margin: 0 0 6px; font-size: 18px; line-height: 1.45; }
+    .muted { color: var(--muted); font-size: 13.5px; margin: 4px 0 0; }
+    .stage-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 20px 0 18px;
+    }
+    .stage-option {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fdfcf9;
+      cursor: pointer;
+      transition: border-color .16s, background .16s, box-shadow .16s, transform .16s;
+    }
+    .stage-option:hover { border-color: #c9a08f; transform: translateY(-1px); }
+    .stage-option.is-selected {
+      border-color: var(--accent);
+      background: #fff8f4;
+      box-shadow: 0 0 0 3px rgba(217, 119, 87, .14);
+    }
+    .stage-option:focus-within { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .stage-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .stage-icon {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      background: #f4e8df;
+    }
+    .stage-option.is-selected .stage-icon { background: #f6dccf; }
+    .stage-name { display: block; font-size: 15px; font-weight: 700; }
+    .stage-desc { display: block; margin-top: 3px; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .btn {
+      min-height: 44px;
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn:hover { filter: brightness(1.06); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; filter: none; }
+    .btn.ghost {
+      background: #fdfcf9;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      font-weight: 600;
+    }
+    .btn.ghost:hover { background: #f4f1e9; filter: none; }
+    .status { min-height: 20px; margin: 12px 0 0; font-size: 13px; }
+    .status.ok { color: var(--ok); }
+    .status.err { color: var(--danger); }
+    .hint {
+      margin: 14px 0 0;
+      padding-top: 13px;
+      border-top: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    .account-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      margin: 16px 0 20px;
+    }
+    .account-grid div { padding: 10px 12px; border-radius: 12px; background: #fdfcf9; border: 1px solid #efede5; }
+    .account-grid dt { color: var(--muted); font-size: 11.5px; }
+    .account-grid dd { margin: 2px 0 0; font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+    @media (max-width: 640px) {
+      .stage-options, .account-grid { grid-template-columns: 1fr; }
+      .profile { align-items: flex-start; }
+      .topbar { padding: 18px 18px 0; }
+      .wrap { width: min(100% - 24px, 920px); margin-top: 16px; }
+    }
+  </style>
+  <link rel="stylesheet" href="../shared/ui.css" />
+  <script defer src="../shared/ui.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="topbar">
+    <a class="back" href="../subject_select/index.html">← 返回学科选择</a>
+    <span class="brand">用户中心</span>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="card profile" aria-labelledby="user-name">
+      <div class="avatar" id="avatar" aria-hidden="true">?</div>
+      <div>
+        <p class="eyebrow">学习账号</p>
+        <h1 id="user-name">加载中…</h1>
+        <p class="muted" id="user-meta">正在读取账号信息</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="stage-title">
+      <h2 id="stage-title">学习学段</h2>
+      <p class="muted">
+        学段决定数字人老师使用哪一套讲法：小学更生活化、步子更小；初中更重视条件分析、规范推理和完整检验。
+      </p>
+
+      <div class="stage-options" role="radiogroup" aria-label="选择学习学段">
+        <label class="stage-option" data-stage="primary">
+          <input type="radio" name="stage" value="primary" />
+          <span class="stage-icon" aria-hidden="true">🧸</span>
+          <span>
+            <span class="stage-name">小学</span>
+            <span class="stage-desc">生活例子、慢一点、多鼓励，先把每一步说清楚。</span>
+          </span>
+        </label>
+        <label class="stage-option" data-stage="junior">
+          <input type="radio" name="stage" value="junior" />
+          <span class="stage-icon" aria-hidden="true">📐</span>
+          <span>
+            <span class="stage-name">初中</span>
+            <span class="stage-desc">条件分析、规范推理、完整计算与结果检验。</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="save-stage" type="button" disabled>保存学段</button>
+        <a class="btn ghost" href="../subject_select/index.html">去选择学科</a>
+      </div>
+      <p class="status" id="stage-status" role="status" aria-live="polite"></p>
+      <p class="hint">
+        切换后，<b>下一次进入课堂</b>时生效；当前正在上的课不会中途更换老师风格。
+      </p>
+    </section>
+
+    <section class="card" id="course-updates" aria-labelledby="course-updates-title">
+      <h2 id="course-updates-title">我的课程更新</h2>
+      <p class="muted">管理员为本账号安排的课程内容和更新通知。完整内容保留在此处，微信只展示模板摘要。</p>
+      <div id="my-course-updates" class="muted">正在读取…</div>
+    </section>
+    <div class="actions"><a class="btn" id="wechat-admin-entry" href="../wechat_admin/" hidden>管理微信助手</a></div>
+
+    <section class="card" aria-labelledby="account-title">
+      <h2 id="account-title">账号信息</h2>
+      <dl class="account-grid">
+        <div><dt>用户名</dt><dd id="account-username">—</dd></div>
+        <div><dt>身份</dt><dd id="account-role">—</dd></div>
+        <div><dt>年级</dt><dd id="account-grade">—</dd></div>
+        <div><dt>当前学段</dt><dd id="account-stage">—</dd></div>
+      </dl>
+      <div class="actions">
+        <button class="btn ghost" id="logout" type="button">退出登录</button>
+        <a class="btn ghost" href="../login/index.html">切换账号</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const AUTH_KEY = "edu_auth";
+    const LOGIN_URL = "/app/login/?next=" + encodeURIComponent(location.pathname + location.search);
+    const STAGES = {
+      primary: { name: "小学", desc: "生活化例子、慢一点、多鼓励" },
+      junior: { name: "初中", desc: "条件分析、规范推理、完整检验" },
+    };
+    const ROLE = { user: "用户", student: "用户", parent: "用户", teacher: "用户", admin: "管理员" };
+
+    const $ = (id) => document.getElementById(id);
+    let currentUser = null;
+    let selectedStage = "";
+    let saving = false;
+
+    function readAuth() {
+      try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); } catch (e) { return null; }
+    }
+    function writeAuth(data) { localStorage.setItem(AUTH_KEY, JSON.stringify(data)); }
+    function clearAuth() { localStorage.removeItem(AUTH_KEY); }
+
+    function normalizeStage(value) {
+      const raw = String(value || "").trim();
+      if (raw === "小学" || raw === "primary") return "primary";
+      if (raw === "初中" || raw === "junior") return "junior";
+      return "";
+    }
+    function stageName(value) { return (STAGES[normalizeStage(value)] || {}).name || "未设置"; }
+    function roleName(value) { return ROLE[value] || value || "用户"; }
+
+    function showStatus(text, kind) {
+      const el = $("stage-status");
+      el.textContent = text || "";
+      el.className = "status" + (kind ? " " + kind : "");
+    }
+
+    function redirectToLogin() {
+      clearAuth();
+      location.replace(LOGIN_URL);
+    }
+
+    function syncStageSelection() {
+      document.querySelectorAll('input[name="stage"]').forEach((input) => {
+        const option = input.closest(".stage-option");
+        const checked = input.value === selectedStage;
+        input.checked = checked;
+        if (option) option.classList.toggle("is-selected", checked);
+      });
+      const savedStage = normalizeStage(currentUser && currentUser.stage);
+      $("save-stage").disabled = saving || !selectedStage || selectedStage === savedStage;
+    }
+
+    function renderUser(user, resetStage) {
+      currentUser = user;
+      const name = user.display_name || user.username || "已登录";
+      $("avatar").textContent = Array.from(name)[0].toUpperCase();
+      $("user-name").textContent = name;
+      $("user-meta").textContent = [roleName(user.role), stageName(user.stage), user.grade]
+        .filter(Boolean)
+        .join(" · ") || "已登录";
+      $("account-username").textContent = user.username || "—";
+      $("account-role").textContent = roleName(user.role);
+      $("account-grade").textContent = user.grade || "未填写";
+      $("account-stage").textContent = stageName(user.stage);
+      // 首次加载以服务端 stage 为准；保存成功后保留用户刚选的项。
+      if (resetStage) selectedStage = normalizeStage(user.stage);
+      syncStageSelection();
+    }
+
+    // 课程更新与管理入口（此逻辑独立于其他页面模块）
+    async function loadWechatExtras(user) {
+      const entry = $("wechat-admin-entry");
+      if (entry) entry.hidden = user.role !== "admin";
+      const auth = readAuth();
+      if (!auth || !auth.token) return;
+      try {
+        const resp = await fetch("/api/wechat/me/course-updates", {
+          cache: "no-store",
+          headers: { Authorization: "Bearer " + auth.token },
+        });
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        const data = await resp.json().catch(() => ({}));
+        const container = $("my-course-updates");
+        container.replaceChildren();
+        const notices = Array.isArray(data.notices) ? data.notices : [];
+        if (!notices.length) { container.textContent = "暂无课程更新。"; return; }
+        for (const notice of notices) {
+          const article = document.createElement("article");
+          const title = document.createElement("h3");
+          const content = document.createElement("p");
+          title.textContent = notice.title;
+          content.textContent = notice.content;
+          content.style.whiteSpace = "pre-wrap";
+          article.append(title, content);
+          container.append(article);
+        }
+      } catch (_) {
+        $("my-course-updates").textContent = "课程更新暂时无法读取，请刷新重试。";
+      }
+    }
+
+    async function loadUser() {
+      const auth = readAuth();
+      if (!auth || !auth.token) { redirectToLogin(); return; }
+
+      // 先用本地缓存渲染，避免刷新时整页空白；再向后端确认最新 stage。
+      if (auth.user) renderUser(auth.user, true);
+
+      try {
+        const resp = await fetch("/api/auth/me", {
+          headers: { Authorization: "Bearer " + auth.token },
+        });
+        if (resp.status === 401) { redirectToLogin(); return; }
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok || !data.user) throw new Error(data.detail || ("HTTP " + resp.status));
+        writeAuth({ token: auth.token, user: data.user });
+        renderUser(data.user, true);
+        await loadWechatExtras(data.user);
+      } catch (err) {
+        showStatus("读取账号失败：" + err.message, "err");
+      }
+    }
+
+    async function saveStage() {
+      const auth = readAuth();
+      if (!auth || !auth.token) { redirectToLogin(); return; }
+      if (!selectedStage || saving) return;
+
+      saving = true;
+      syncStageSelection();
+      $("save-stage").textContent = "正在保存…";
+      showStatus("", "");
+
+      try {
+        const resp = await fetch("/api/auth/me/stage", {
+          method: "PATCH",
+          headers: {
+            Authorization: "Bearer " + auth.token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ stage: selectedStage }),
+        });
+        if (resp.status === 401) { redirectToLogin(); return; }
+
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok) throw new Error(data.detail || ("HTTP " + resp.status));
+        if (!data.user) throw new Error("服务端未返回用户信息");
+
+        writeAuth({ token: auth.token, user: data.user });
+        renderUser(data.user, false);
+        showStatus("已保存为「" + stageName(data.user.stage) + "」，下次进入课堂生效。", "ok");
+      } catch (err) {
+        showStatus("保存失败：" + err.message, "err");
+      } finally {
+        saving = false;
+        $("save-stage").textContent = "保存学段";
+        syncStageSelection();
+      }
+    }
+
+    document.querySelectorAll('input[name="stage"]').forEach((input) => {
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+        selectedStage = input.value;
+        showStatus("", "");
+        syncStageSelection();
+      });
+    });
+
+    $("save-stage").addEventListener("click", saveStage);
+    $("logout").addEventListener("click", () => {
+      clearAuth();
+      location.href = "../login/index.html";
+    });
+
+    loadUser();
+  </script>
+</body>
+</html>

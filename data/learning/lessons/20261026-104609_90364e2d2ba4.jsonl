@@ -1,0 +1,7 @@
+{"ts": 1792982769.596, "kind": "session_start", "data": {"subject": "数学", "stage": "junior", "grade": "初二"}}
+{"ts": 1792982779.104, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792982795.016, "kind": "student_text", "data": {"text_len": 22, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792982795.018, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792984571.825, "kind": "quiz_asked", "data": {"question_id": "一个长方形，只知道它的一条边长是 4 厘米，它的面积能确定吗？"}}
+{"ts": 1792984585.712, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792984591.318, "kind": "session_end", "data": {"reason": "disconnect"}}

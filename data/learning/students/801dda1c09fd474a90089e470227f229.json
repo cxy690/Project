@@ -1,0 +1,478 @@
+{
+  "student_id": "801dda1c09fd474a90089e470227f229",
+  "updated_at": 1792984562.650393,
+  "totals": {
+    "lessons": 30,
+    "avg_overall": 23.7,
+    "avg_mastery": 2.9
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261026-111558_f5db6a4a24a5",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792984558.9017978,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261026-105227_da81b4e2c05d",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792983147.4232194,
+      "completion_score": 41.8,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 67.0,
+      "overall_score": 41.3,
+      "flags": [
+        "课堂中离场 1 次，累计 23 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261026-105212_350497474f0e",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792983132.5346863,
+      "completion_score": 10.1,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 32.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261026-104757_0cd6e62ade09",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792982877.685561,
+      "completion_score": 48.7,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 45.5,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261026-104600_8e52487ad889",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792982760.7481656,
+      "completion_score": 29.9,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 19.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261026-104648_ed7957ded82a",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792982808.1635551,
+      "completion_score": 46.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.6,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261026-104621_2c1c622347f2",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792982781.0161126,
+      "completion_score": 45.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.4,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-215602_3426a318c4df",
+      "subject": "历史",
+      "stage": "",
+      "started_at": 1792677362.4767053,
+      "completion_score": 41.8,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 67.0,
+      "overall_score": 21.3,
+      "flags": [
+        "课堂中离场 1 次，累计 23 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-215558_915961bf8a9f",
+      "subject": "道德与法治",
+      "stage": "",
+      "started_at": 1792677358.0750244,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-215552_7bbb5964a9bc",
+      "subject": "物理",
+      "stage": "",
+      "started_at": 1792677352.9788628,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-215548_8987de41e46e",
+      "subject": "科学",
+      "stage": "",
+      "started_at": 1792677348.6021283,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-215539_876255e96cdb",
+      "subject": "生物",
+      "stage": "",
+      "started_at": 1792677339.9977686,
+      "completion_score": 10.1,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-215053_67ff75d401d2",
+      "subject": "物理",
+      "stage": "",
+      "started_at": 1792677053.7333694,
+      "completion_score": 31.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 19.6,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-214101_41d27ba28b25",
+      "subject": "地理",
+      "stage": "",
+      "started_at": 1792676461.6157415,
+      "completion_score": 53.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 47.2,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-214051_a74359249dec",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792676451.9169674,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-213937_532377db5b18",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792676377.551221,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-213523_ee04b4f7e0c5",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792676123.320569,
+      "completion_score": 31.1,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 19.4,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-211304_eb3b0578afe3",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792674784.1799328,
+      "completion_score": 45.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 24.4,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-211259_2f704e7202d9",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792674779.3926947,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-202706_3971db4306dc",
+      "subject": "化学",
+      "stage": "",
+      "started_at": 1792672026.8984346,
+      "completion_score": 42.3,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 59.0,
+      "overall_score": 20.7,
+      "flags": [
+        "课堂中离场 2 次，累计 45 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-202111_3971db4306dc",
+      "subject": "化学",
+      "stage": "",
+      "started_at": 1792671671.330171,
+      "completion_score": 28.9,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.6,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-202055_3971db4306dc",
+      "subject": "化学",
+      "stage": "",
+      "started_at": 1792671655.040334,
+      "completion_score": 10.2,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.1,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-160333_ff142ff2e3ae",
+      "subject": "地理",
+      "stage": "",
+      "started_at": 1792656213.5069551,
+      "completion_score": 22.9,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 67.0,
+      "overall_score": 14.7,
+      "flags": [
+        "课堂中离场 1 次，累计 13 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-155811_ff142ff2e3ae",
+      "subject": "地理",
+      "stage": "",
+      "started_at": 1792655891.7069688,
+      "completion_score": 32.1,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 19.7,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-145709_ff142ff2e3ae",
+      "subject": "地理",
+      "stage": "",
+      "started_at": 1792652229.8723793,
+      "completion_score": 43.2,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 59.0,
+      "overall_score": 21.0,
+      "flags": [
+        "课堂中离场 2 次，累计 60 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-145611_35ae269e0223",
+      "subject": "科学",
+      "stage": "",
+      "started_at": 1792652171.9135895,
+      "completion_score": 28.2,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.4,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-141443_bba3467cfa28",
+      "subject": "政治",
+      "stage": "",
+      "started_at": 1792649683.4382584,
+      "completion_score": 68.2,
+      "mastery_score": 86.7,
+      "interaction_rate": 1.0,
+      "authenticity_score": 67.0,
+      "overall_score": 80.9,
+      "flags": [
+        "课堂中离场 1 次，累计 35 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言"
+      ]
+    },
+    {
+      "lesson_id": "20261022-141421_6141a86b71c9",
+      "subject": "英语",
+      "stage": "",
+      "started_at": 1792649661.4290824,
+      "completion_score": 10.3,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.1,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-141259_4772f1a8e155",
+      "subject": "历史",
+      "stage": "",
+      "started_at": 1792649579.9679515,
+      "completion_score": 28.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.5,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-135831_f704aa2f30f7",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792648711.1912796,
+      "completion_score": 30.7,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 19.2,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

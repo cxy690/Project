@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# 数据库 / 运行时产物
+*.db
+*.sqlite3
+education.db
+data/raw/checkpoints/
+data/raw/memory/
+data/raw/board_snapshots/
+data/raw/l1_segments/
+!data/raw/.gitkeep
+# 数字人人脸预处理缓存（按 video_hash 生成，运行时产物）
+data/cache/
+# 端到端验证产物
+data/e2e/
+
+# 算力云部署产物（虚拟环境 / 模型仓库与权重 / 服务日志）
+.venvs/
+models_zoo/
+deploy/cloud/logs/
+
+# 环境变量（.env 作为模板已纳入版本，真实密钥请勿提交）
+.env.local
+.env.*.local
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 测试 / 缓存
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# 本地备份 / 预览产物 / 游离数据
+*.bak
+*.bak.*
+*.bak-*
+*.bak_*
+.env.*.bak
+.env.bak.*
+preview_*.mp4
+preview_*.png
+server/data/
+
+# 真实密钥（禁止入库，模板见 .env.example）
+.env
+
+# 大型运行时媒体数据（课件视频/头像流/教师素材等）
+data/courseware/
+data/avatar_stream/
+data/avatar_clips/
+data/teachers/voices/
+*.mp4
+*.pptx
+
+# 日志与进程文件
+logs/
+tmp/
+*.log
+*.pid
+
+# 数据库备份
+education.db.bak.*
+*.bak.alias
+*.bak.numeric
+*.bak.org
+
+# 同步/本地备份快照
+_backup_sync_*/
+_smoke*
+

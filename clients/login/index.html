@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>登录 / 注册 · AI 教师 1 对 1 辅导</title>
+  <style>
+    /* 配色对齐 clients/shared/ui.css 的暖色系统：米白底 + 砖红主色 */
+    :root {
+      --bg:#faf9f5;
+      --surface:#ffffff;
+      --line:#e2ded2;
+      --line-soft:#efebe2;
+      --text:#141413;
+      --muted:#605e57;
+      --brand:#a84f35;
+      --brand-strong:#8f402b;
+      --brand-soft:#f8eee8;
+      --danger:#b3261e;
+      --ok:#3f7d58;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; color:var(--text); background:var(--bg);
+      font-family:"Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      display:flex; align-items:center; justify-content:center;
+      padding:clamp(20px, 4vw, 56px);
+    }
+    /* 左文案 + 右登录卡 */
+    .stage {
+      width:100%; max-width:1160px; display:grid; gap:clamp(32px, 5vw, 92px);
+      grid-template-columns:minmax(0, 1fr) minmax(0, 404px); align-items:center;
+    }
+    @media (max-width:940px) {
+      .stage { grid-template-columns:1fr; max-width:430px; gap:34px; }
+      .intro { text-align:left; }
+    }
+    .back { display:inline-block; margin-bottom:30px; color:var(--muted); font-size:13px; text-decoration:none; transition:color .2s ease; }
+    .back:hover { color:var(--brand); }
+    .eyebrow { margin:0 0 22px; color:var(--brand); font-size:11.5px; letter-spacing:.16em; font-weight:700; text-transform:uppercase; }
+    h1 { margin:0 0 20px; font-size:clamp(32px, 4.2vw, 50px); line-height:1.26; letter-spacing:-.03em; font-weight:800; }
+    h1 span { color:var(--brand); }
+    .lead { margin:0 0 32px; max-width:400px; color:var(--muted); font-size:15px; line-height:1.95; }
+    .points { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+    .points li { position:relative; padding-left:24px; font-size:14px; color:#4a4741; line-height:1.6; }
+    .points li::before { content:"✓"; position:absolute; left:2px; top:0; color:var(--brand); font-size:13px; font-weight:700; }
+
+    .card {
+      background:var(--surface); border:1px solid var(--line); border-radius:24px;
+      padding:26px 24px; box-shadow:0 26px 60px -34px rgba(81,75,52,.42);
+    }
+    .brand { display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+    .dot { width:6px; height:6px; border-radius:50%; background:#3f9c6d; }
+    .brand b { font-size:12.5px; font-weight:600; color:#514f48; }
+    .h { font-size:26px; margin:0 0 6px; font-weight:800; letter-spacing:-.02em; }
+    .sub { color:var(--muted); font-size:13px; margin:0 0 20px; line-height:1.7; }
+
+    .tabs { display:flex; gap:4px; background:#f4f1e9; padding:4px; border-radius:12px; margin-bottom:4px; }
+    .tabs button {
+      flex:1; border:0; background:transparent; color:var(--muted); padding:10px 0;
+      border-radius:9px; font-size:14px; font-weight:600; cursor:pointer; transition:.18s;
+    }
+    .tabs button:hover { color:var(--text); }
+    .tabs button.active { background:var(--brand); color:#fff; box-shadow:0 8px 16px -10px rgba(168,79,53,.95); }
+
+    label { display:block; font-size:12.5px; color:#6e6a62; font-weight:600; margin:16px 0 7px; }
+    input, select {
+      width:100%; padding:12px 14px; border-radius:11px; font-size:14px;
+      background:#fcfbf8; border:1px solid var(--line); color:var(--text); outline:none; transition:.16s;
+    }
+    input::placeholder { color:#a9a49a; }
+    input:focus, select:focus { border-color:var(--brand); background:#fff; box-shadow:0 0 0 3px rgba(168,79,53,.14); }
+    .field { position:relative; }
+    .field input { padding-right:58px; }
+    .peek {
+      position:absolute; right:6px; top:50%; transform:translateY(-50%); border:0; background:transparent;
+      color:var(--brand); font-size:12.5px; font-weight:600; padding:6px 9px; border-radius:8px; cursor:pointer;
+    }
+    .peek:hover { background:var(--brand-soft); }
+    .row { display:flex; gap:10px; }
+    .row > div { flex:1; min-width:0; }
+    .row label { margin-top:16px; }
+
+    .btn {
+      width:100%; margin-top:22px; padding:13px 0; border:0; border-radius:11px; cursor:pointer;
+      font-size:15px; font-weight:700; color:#fff; background:var(--brand); transition:.18s;
+    }
+    .btn:hover { background:var(--brand-strong); }
+    .btn:disabled { opacity:.6; cursor:not-allowed; }
+    .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--muted); }
+    .btn.ghost:hover { background:#f4f1e9; color:var(--text); }
+    .msg { margin-top:12px; font-size:13px; min-height:18px; }
+    .msg.err { color:var(--danger); }
+    .msg.ok { color:var(--ok); }
+    .hide { display:none !important; }
+    .who { font-size:14.5px; margin:6px 0 2px; font-weight:600; }
+    .hint { margin-top:18px; font-size:12px; color:var(--muted); line-height:1.7; border-top:1px dashed var(--line); padding-top:14px; }
+    .hint code { background:#f4f1e9; padding:1px 6px; border-radius:6px; }
+    a.link { color:var(--brand); text-decoration:none; }
+    a.link:hover { text-decoration:underline; }
+    :where(a, button, input, select):focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <!-- 左：品牌文案 -->
+    <aside class="intro">
+      <a class="back" href="/app/">← 返回首页</a>
+      <p class="eyebrow">AI LEARNING · 专属学习空间</p>
+      <h1>让好奇心，<br /><span>遇见耐心的解答。</span></h1>
+      <p class="lead">与 AI 教师一起拆解难题、梳理知识，在每一次交流中找到自己的学习节奏。</p>
+      <ul class="points">
+        <li>一对一讲解，随时追问</li>
+        <li>语音互动与白板协作</li>
+        <li>学习记录随账号保存</li>
+      </ul>
+    </aside>
+
+    <!-- 右：登录卡 -->
+    <main class="card">
+      <div class="brand"><span class="dot"></span><b>AI 一对一家教</b></div>
+
+      <!-- 已登录态 -->
+      <section id="panel-logged" class="hide">
+        <h2 class="h">已登录</h2>
+        <p class="sub" id="logged-sub">你可以直接进入课堂，或切换其它账号。</p>
+        <p class="who" id="who"></p>
+        <button class="btn" id="btn-enter">进入课堂</button>
+        <button class="btn ghost hide" id="btn-admin">进入技能管理平台</button>
+        <button class="btn ghost" id="btn-logout">退出登录</button>
+      </section>
+
+      <!-- 未登录态：登录 / 注册 -->
+      <section id="panel-auth">
+        <h2 class="h" id="title">欢迎回来</h2>
+        <p class="sub" id="subtitle">登录后，你的学习记录会绑定到账号，跨设备可续。</p>
+
+        <div class="tabs">
+          <button id="tab-login" class="active" type="button">登录</button>
+          <button id="tab-register" type="button">注册</button>
+        </div>
+
+        <form id="form">
+          <label for="username">用户名</label>
+          <input id="username" name="username" autocomplete="username" placeholder="3-64 位" required />
+
+          <label for="password">密码</label>
+          <div class="field">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="至少 6 位" required />
+            <button class="peek" id="peek" type="button" aria-label="显示密码">显示</button>
+          </div>
+
+          <div id="register-only" class="hide">
+            <div class="row">
+              <div>
+                <label for="role">身份</label>
+                <select id="role">
+                  <option value="student">学生</option>
+                  <option value="parent">家长</option>
+                  <option value="teacher">教师</option>
+                </select>
+              </div>
+              <div>
+                <label for="grade">年级（可选）</label>
+                <input id="grade" placeholder="如：初一" />
+              </div>
+            </div>
+            <label for="display_name">昵称（可选）</label>
+            <input id="display_name" placeholder="留空则用用户名" />
+          </div>
+
+          <button class="btn" id="btn-submit" type="submit">登录</button>
+        </form>
+
+        <div class="msg" id="msg"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const AUTH_KEY = "edu_auth";
+    const qs = new URLSearchParams(location.search);
+    // next 显式指定则用之；否则登录后按角色分流：管理员 / 教师进技能管理平台
+    // （管理员看平台全量，教师自动落到本机构学情），其他角色进学生端。
+    const NEXT = qs.get("next") || "";
+    const ADMIN_HOME = "/app/skill_admin/";         // 管理员：技能管理平台
+    const TEACHER_HOME = "/app/learning_center/";   // 教师：学情分析（本机构学情）
+    const STUDENT_HOME = "/app/subject_select/";    // 学生 / 家长：学科选择页
+
+    /**
+     * 按账号角色决定登录后的落地页。
+     *
+     * 三条硬规则（不再让 ?next= 乱带路）：
+     * * 管理员 -> 技能管理平台（只有这里认 ?next=，便于从后台被踢回登录后原路返回）；
+     * * 教师   -> 学情分析。**以前教师被送到 /app/skill_admin/**，而那页只对 admin 开放，
+     *             教师登录后必然撞上「无权访问」，等于登进来就被挡在门外；
+     * * 学生 / 家长 / 其它 -> 学科选择页。这里故意忽略 ?next=：别处传来的
+     *   next=/app/skill_admin/ 会把学生拽进无权访问页，正是这次要修的现象。
+     */
+    function landingFor(user) {
+      const role = (user && user.role) || "";
+      if (role === "admin") return NEXT || ADMIN_HOME;
+      if (role === "teacher") return TEACHER_HOME;
+      return STUDENT_HOME;
+    }
+
+    const $ = (id) => document.getElementById(id);
+    let mode = "login";
+
+    function readAuth() {
+      try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); } catch (e) { return null; }
+    }
+    function writeAuth(data) { localStorage.setItem(AUTH_KEY, JSON.stringify(data)); }
+    function clearAuth() { localStorage.removeItem(AUTH_KEY); }
+
+    function setMode(next) {
+      mode = next;
+      const isLogin = mode === "login";
+      // 「已登录」与「未登录」是两个互斥面板，这里必须同时切换可见性：
+      // 原先只切 tab，导致点「退出登录」后 localStorage 已清空、但界面仍停在
+      // 「已登录」卡片上，看起来像按钮没反应。
+      $("panel-logged").classList.add("hide");
+      $("panel-auth").classList.remove("hide");
+      $("tab-login").classList.toggle("active", isLogin);
+      $("tab-register").classList.toggle("active", !isLogin);
+      $("register-only").classList.toggle("hide", isLogin);
+      $("title").textContent = isLogin ? "欢迎回来" : "创建账号";
+      $("subtitle").textContent = isLogin
+        ? "登录后，你的学习记录会绑定到账号，跨设备可续。"
+        : "注册后即可开始 1 对 1 辅导，学习数据归属本账号。";
+      $("btn-submit").textContent = isLogin ? "登录" : "注册并进入";
+      $("password").setAttribute("autocomplete", isLogin ? "current-password" : "new-password");
+      showMsg("", "");
+    }
+
+    function showMsg(text, kind) {
+      const el = $("msg");
+      el.textContent = text || "";
+      el.className = "msg" + (kind ? " " + kind : "");
+    }
+
+    async function submit(event) {
+      event.preventDefault();
+      const username = $("username").value.trim();
+      const password = $("password").value;
+      if (!username || !password) { showMsg("请填写用户名与密码", "err"); return; }
+
+      const payload = { username, password };
+      if (mode === "register") {
+        payload.role = $("role").value;
+        payload.grade = $("grade").value.trim();
+        payload.display_name = $("display_name").value.trim();
+      }
+
+      const url = mode === "login" ? "/api/auth/login" : "/api/auth/register";
+      const btn = $("btn-submit");
+      btn.disabled = true;
+      showMsg("处理中…", "");
+      try {
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok) {
+          showMsg(data.detail || ("请求失败（" + resp.status + "）"), "err");
+          return;
+        }
+        writeAuth({ token: data.token, user: data.user });
+        showMsg("成功，正在进入…", "ok");
+        setTimeout(() => { location.href = landingFor(data.user); }, 500);
+      } catch (err) {
+        showMsg("网络错误：" + err.message, "err");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function renderLogged(user) {
+      $("panel-auth").classList.add("hide");
+      $("panel-logged").classList.remove("hide");
+      const roleName = { student: "学生", parent: "家长", teacher: "教师", admin: "管理员" }[user.role] || user.role;
+      $("who").textContent = (user.display_name || user.username) + " · " + roleName + (user.grade ? "（" + user.grade + "）" : "");
+      // 主按钮文案跟着角色走：管理员进管理平台、教师进学情、学生进选科
+      const isAdmin = user.role === "admin";
+      const isTeacher = user.role === "teacher";
+      $("btn-enter").textContent = isAdmin ? "进入技能管理平台" : (isTeacher ? "进入学情分析" : "进入课堂");
+      // 管理员的主按钮已经指向技能管理平台，这枚附加按钮再显示就重复了
+      $("btn-admin").classList.add("hide");
+      $("logged-sub").textContent = isAdmin
+        ? "你是项目开发人员：可进入技能管理平台维护教师技能，也可进入课堂预览。"
+        : (isTeacher ? "可进入学情分析，查看本机构学生的课堂记录。" : "你可以直接进入课堂，或切换其它账号。");
+    }
+
+    async function refresh() {
+      const auth = readAuth();
+      if (!auth || !auth.token) { setMode("login"); return; }
+      // 令牌可能在服务端已过期/被替换：向后端确认一次
+      try {
+        const resp = await fetch("/api/auth/me", { headers: { Authorization: "Bearer " + auth.token } });
+        if (!resp.ok) { clearAuth(); setMode("login"); return; }
+        const data = await resp.json();
+        renderLogged(data.user);
+      } catch (e) {
+        renderLogged(auth.user || { username: "已登录", role: "" });
+      }
+    }
+
+    $("tab-login").addEventListener("click", () => setMode("login"));
+    $("tab-register").addEventListener("click", () => setMode("register"));
+    $("form").addEventListener("submit", submit);
+    // 密码框右侧「显示 / 隐藏」切换
+    $("peek").addEventListener("click", () => {
+      const input = $("password");
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      $("peek").textContent = show ? "隐藏" : "显示";
+      $("peek").setAttribute("aria-label", show ? "隐藏密码" : "显示密码");
+      input.focus();
+    });
+    $("btn-logout").addEventListener("click", () => {
+      clearAuth();
+      // 清干净再回登录页：直接重载，避免停留在「已登录」卡片上
+      location.replace("/app/login/");
+    });
+    $("btn-enter").addEventListener("click", () => {
+      const auth = readAuth() || {};
+      location.href = landingFor(auth.user || {});
+    });
+    $("btn-admin").addEventListener("click", () => { location.href = ADMIN_HOME; });
+
+    refresh();
+  </script>
+</body>
+</html>

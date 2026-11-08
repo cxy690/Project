@@ -1,0 +1,70 @@
+{
+  "title": "勾股定理",
+  "subtitle": "初中数学 · 当场手绘一遍推导",
+  "type": "board",
+  "canvas": "landscape",
+  "theme": "chalk",
+  "font_size": 40,
+  "rough": true,
+  "rough_amp": 2.6,
+  "seed": 77,
+  "strokes": [
+    {
+      "id": "legA",
+      "points": [[420, 500], [420, 900]],
+      "color": "a2",
+      "width": 7
+    },
+    {
+      "id": "legB",
+      "points": [[420, 900], [920, 900]],
+      "color": "a3",
+      "width": 7
+    },
+    {
+      "id": "hyp",
+      "points": [[420, 500], [920, 900]],
+      "color": "a1",
+      "width": 7
+    }
+  ],
+  "circles": [
+    { "id": "markC", "x": 420, "y": 900, "r": 14, "color": "a4", "width": 5 }
+  ],
+  "notes": [
+    { "id": "ra", "x": 432, "y": 852, "text": "90°", "size": 34, "color": "a4" },
+    { "id": "la", "x": 300, "y": 640, "text": "a", "size": 56, "color": "a2", "weight": 800 },
+    { "id": "lb", "x": 650, "y": 930, "text": "b", "size": 56, "color": "a3", "weight": 800 },
+    { "id": "lc", "x": 720, "y": 610, "text": "c", "size": 56, "color": "a1", "weight": 800 },
+    { "id": "f1", "x": 1120, "y": 430, "text": "a² + b² = c²", "size": 76, "color": "accent", "weight": 800 },
+    { "id": "f2", "x": 1120, "y": 590, "text": "两条直角边的平方和\n等于斜边的平方", "size": 34, "color": "a3", "weight": 500, "maxW": 640 },
+    { "id": "f3", "x": 1120, "y": 760, "text": "6² + 8² = 36 + 64 = 100 = 10²", "size": 40, "color": "a4", "weight": 600, "maxW": 700 }
+  ],
+  "steps": [
+    {
+      "reveal": ["legA", "legB", "markC", "ra"],
+      "narration": "先在黑板上画一个直角三角形，直角在这里。两条直角边，一条竖着，一条横着。",
+      "seconds": 10
+    },
+    {
+      "reveal": ["hyp"],
+      "narration": "把两个锐角的端点连起来，这条边叫斜边。直角三角形就画完了。",
+      "seconds": 8
+    },
+    {
+      "reveal": ["la", "lb", "lc"],
+      "narration": "给三条边起名字：两条直角边分别叫 a 和 b，斜边叫 c。记住，c 永远是直角对面那条。",
+      "seconds": 10
+    },
+    {
+      "reveal": ["f1", "f2"],
+      "narration": "它们的关系就是勾股定理：两条直角边的平方和，等于斜边的平方。",
+      "seconds": 10
+    },
+    {
+      "reveal": ["f3"],
+      "narration": "代一组数字验证：直角边 6 和 8，平方和是 36 加 64 等于 100，开方正好 10。这就是最常见的勾股数。",
+      "seconds": 12
+    }
+  ]
+}

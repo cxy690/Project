@@ -1,0 +1,4 @@
+{"ts": 1792478888.275, "kind": "session_start", "data": {"subject": "语文", "stage": "", "grade": ""}}
+{"ts": 1792478913.861, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792480692.831, "kind": "quiz_asked", "data": {"question_id": "下面哪个不是《西游记》中的角色？"}}
+{"ts": 1792482496.018, "kind": "session_end", "data": {"reason": "disconnect"}}

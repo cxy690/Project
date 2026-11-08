@@ -1,0 +1,53 @@
+{
+  "title": "正弦函数 y = sin x 的图像",
+  "subtitle": "高中数学 · 必修四 · 振幅与周期性",
+  "type": "curve",
+  "canvas": "landscape",
+  "theme": "light",
+  "font_size": 30,
+  "axes": {
+    "style": "cross",
+    "x": { "label": "x（弧度）", "min": -2, "max": 2, "unit": "pi" },
+    "y": { "label": "y", "min": -1.7, "max": 1.7, "ticks": [-1, 0, 1] }
+  },
+  "curves": [
+    {
+      "id": "sin",
+      "label": "y = sin x",
+      "fn": "sin(x)",
+      "color": "#2F6FED",
+      "width": 5,
+      "label_at": [-0.78, 1.28]
+    }
+  ],
+  "markers": [
+    { "id": "peak", "x": 0.5, "y": 1, "text": "最大值 1", "color": "#E05252" },
+    { "id": "trough", "x": 1.5, "y": -1, "text": "最小值 -1", "color": "#E05252" },
+    { "id": "zero", "x": 1, "y": 0, "text": "零点 π" }
+  ],
+  "regions": [
+    { "id": "period", "from": 0, "to": 2, "label": "一个周期 T = 2π", "color": "#2E9E6B" }
+  ],
+  "steps": [
+    {
+      "reveal": ["sin"],
+      "narration": "先看 y = sin x 的图像。横轴不写小数，直接标成 π/2、π、3π/2，这样周期看得最清楚。",
+      "seconds": 10
+    },
+    {
+      "reveal": ["peak", "trough"],
+      "narration": "正弦值最大到 1，最小到 -1。这个「摆动的幅度」就是振幅，A = 1。",
+      "seconds": 10
+    },
+    {
+      "reveal": ["zero"],
+      "narration": "每到一个 π 的整数倍，图像就穿过横轴一次——这些点叫零点。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["period"],
+      "narration": "从 0 到 2π 正好走完一个完整的起伏，之后原样重复。所以周期 T = 2π，最小正周期就是它。",
+      "seconds": 12
+    }
+  ]
+}

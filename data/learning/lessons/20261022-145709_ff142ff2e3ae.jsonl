@@ -1,0 +1,6 @@
+{"ts": 1792652229.872, "kind": "session_start", "data": {"subject": "地理", "stage": "", "grade": ""}}
+{"ts": 1792652252.067, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792652254.011, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792654221.942, "kind": "quiz_asked", "data": {"question_id": "咱们看地图的时候，地图上一般是怎么表示方向的？也就是说，地图上北下南、左西右东这"}}
+{"ts": 1792654244.926, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792655886.93, "kind": "session_end", "data": {"reason": "disconnect"}}

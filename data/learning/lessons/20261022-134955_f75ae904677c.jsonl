@@ -1,0 +1,3 @@
+{"ts": 1792648195.391, "kind": "session_start", "data": {"subject": "语文", "stage": "", "grade": ""}}
+{"ts": 1792648237.354, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792648396.682, "kind": "session_end", "data": {"reason": "disconnect"}}

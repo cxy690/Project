@@ -1,0 +1,29 @@
+{
+  "student_id": "stu-10508",
+  "updated_at": 1792762207.8773406,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 40.7,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261023-211648_245dc1a29c95",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792761408.4961126,
+      "completion_score": 40.1,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 67.0,
+      "overall_score": 40.7,
+      "flags": [
+        "课堂中离场 1 次，累计 13 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

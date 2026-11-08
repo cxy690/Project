@@ -1,0 +1,4 @@
+{"ts": 1792671557.553, "kind": "session_start", "data": {"subject": "英语", "stage": "", "grade": ""}}
+{"ts": 1792671557.553, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792671557.553, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792671557.553, "kind": "phase", "data": {"phase": "ended"}}

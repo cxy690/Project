@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1080" viewBox="0 0 1080 1080">
+<rect x="0" y="0" width="1080" height="1080" fill="#FBFAF7"/>
+<text x="54.00" y="120.00" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="60.0" font-weight="700" fill="#1B2430" text-anchor="start">二元一次方程2x+y=4的图象</text>
+<text x="54.00" y="163.30" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="32.0" fill="#5A6675" text-anchor="start">一条直线：取两点连线即可</text>
+<line x1="54.00" y1="200.80" x2="1026.00" y2="200.80" stroke="#C3C4C5" stroke-width="3.00" stroke-linecap="round"/>
+<line x1="162.00" y1="296.80" x2="162.00" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<line x1="162.00" y1="930.00" x2="162.00" y2="940.00" stroke="#95A0B0" stroke-width="2.00" stroke-linecap="round"/>
+<text x="162.00" y="974.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="middle">0</text>
+<line x1="325.60" y1="296.80" x2="325.60" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<line x1="325.60" y1="930.00" x2="325.60" y2="940.00" stroke="#95A0B0" stroke-width="2.00" stroke-linecap="round"/>
+<text x="325.60" y="974.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="middle">2</text>
+<line x1="489.20" y1="296.80" x2="489.20" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<line x1="489.20" y1="930.00" x2="489.20" y2="940.00" stroke="#95A0B0" stroke-width="2.00" stroke-linecap="round"/>
+<text x="489.20" y="974.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="middle">4</text>
+<line x1="652.80" y1="296.80" x2="652.80" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<line x1="652.80" y1="930.00" x2="652.80" y2="940.00" stroke="#95A0B0" stroke-width="2.00" stroke-linecap="round"/>
+<text x="652.80" y="974.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="middle">6</text>
+<line x1="816.40" y1="296.80" x2="816.40" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<line x1="816.40" y1="930.00" x2="816.40" y2="940.00" stroke="#95A0B0" stroke-width="2.00" stroke-linecap="round"/>
+<text x="816.40" y="974.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="middle">8</text>
+<line x1="980.00" y1="296.80" x2="980.00" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<line x1="980.00" y1="930.00" x2="980.00" y2="940.00" stroke="#95A0B0" stroke-width="2.00" stroke-linecap="round"/>
+<text x="980.00" y="974.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="middle">10</text>
+<line x1="162.00" y1="930.00" x2="980.00" y2="930.00" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<text x="146.00" y="940.50" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="end">0</text>
+<line x1="162.00" y1="803.36" x2="980.00" y2="803.36" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<text x="146.00" y="813.86" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="end">2</text>
+<line x1="162.00" y1="676.72" x2="980.00" y2="676.72" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<text x="146.00" y="687.22" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="end">4</text>
+<line x1="162.00" y1="550.08" x2="980.00" y2="550.08" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<text x="146.00" y="560.58" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="end">6</text>
+<line x1="162.00" y1="423.44" x2="980.00" y2="423.44" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<text x="146.00" y="433.94" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="end">8</text>
+<line x1="162.00" y1="296.80" x2="980.00" y2="296.80" stroke="#E7EBF1" stroke-width="1.40" stroke-linecap="round"/>
+<text x="146.00" y="307.30" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="27.0" fill="#5A6675" text-anchor="end">10</text>
+<line x1="162.00" y1="288.80" x2="162.00" y2="930.00" stroke="#95A0B0" stroke-width="2.60" stroke-linecap="round"/>
+<line x1="162.00" y1="930.00" x2="990.00" y2="930.00" stroke="#95A0B0" stroke-width="2.60" stroke-linecap="round"/>
+</svg>

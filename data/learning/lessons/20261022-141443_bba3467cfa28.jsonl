@@ -1,0 +1,8 @@
+{"ts": 1792649683.438, "kind": "session_start", "data": {"subject": "政治", "stage": "", "grade": ""}}
+{"ts": 1792649723.365, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792649723.555, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792651852.405, "kind": "quiz_asked", "data": {"question_id": "咱们常说“搞政治”，那政治最核心的事儿是啥？打个比方，一家人过日子，谁说了算、钱"}}
+{"ts": 1792651878.92, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792652153.833, "kind": "student_text", "data": {"text_len": 27, "channel": "text", "initiative": false, "latency": 301.43}}
+{"ts": 1792652158.433, "kind": "quiz_answered", "data": {"question_id": "咱们常说“搞政治”，那政治最核心的事儿是啥？打个比方，一家人过日子，谁说了算、钱", "correct": true, "latency": 306.03}}
+{"ts": 1792652168.917, "kind": "session_end", "data": {"reason": "disconnect"}}

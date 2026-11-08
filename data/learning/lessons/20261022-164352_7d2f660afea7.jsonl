@@ -1,0 +1,4 @@
+{"ts": 1792658632.326, "kind": "session_start", "data": {"subject": "数学", "stage": "junior", "grade": "初二"}}
+{"ts": 1792658636.945, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792658637.461, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792659722.579, "kind": "session_end", "data": {"reason": "disconnect"}}

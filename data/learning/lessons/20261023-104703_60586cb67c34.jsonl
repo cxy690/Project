@@ -1,0 +1,5 @@
+{"ts": 1792723623.037, "kind": "session_start", "data": {"subject": "地理", "stage": "junior", "grade": "初二"}}
+{"ts": 1792723632.861, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792723649.84, "kind": "student_text", "data": {"text_len": 23, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792723649.841, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792723885.819, "kind": "session_end", "data": {"reason": "disconnect"}}

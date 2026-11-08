@@ -1,0 +1,26 @@
+{
+  "student_id": "stu-12421",
+  "updated_at": 1792466776.1221843,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 12.0,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261020-112615_0c2e07b9960c",
+      "subject": "英语",
+      "stage": "",
+      "started_at": 1792466775.135235,
+      "completion_score": 10.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 12.0,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{"ts": 1792648994.139, "kind": "session_start", "data": {"subject": "语文", "stage": "", "grade": ""}}
+{"ts": 1792648996.605, "kind": "student_text", "data": {"text_len": 5, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792649005.266, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792649005.267, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792649019.258, "kind": "student_text", "data": {"text_len": 7, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792649038.424, "kind": "session_end", "data": {"reason": "disconnect"}}

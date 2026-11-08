@@ -1,0 +1,48 @@
+{
+  "title": "供给与需求",
+  "subtitle": "经济学入门 · 均衡价格是怎么形成的",
+  "type": "curve",
+  "canvas": "landscape",
+  "theme": "light",
+  "axes": {
+    "x": { "label": "数量 Q", "min": 0, "max": 10 },
+    "y": { "label": "价格 P", "min": 0, "max": 10 }
+  },
+  "curves": [
+    {
+      "id": "demand",
+      "label": "需求 D",
+      "color": "#E05252",
+      "points": [[0.6, 9.0], [3.0, 7.2], [5.0, 5.4], [7.5, 3.0], [9.4, 1.6]]
+    },
+    {
+      "id": "supply",
+      "label": "供给 S",
+      "color": "#2E9E6B",
+      "points": [[0.6, 1.4], [3.0, 3.4], [5.0, 5.4], [7.5, 7.4], [9.4, 9.0]]
+    }
+  ],
+  "regions": [
+    { "id": "zone", "from": 4.35, "to": 5.65, "label": "均衡区间" }
+  ],
+  "markers": [
+    { "id": "eq", "x": 5.0, "y": 5.4, "text": "均衡点 E" }
+  ],
+  "steps": [
+    {
+      "reveal": ["demand"],
+      "narration": "需求曲线向下倾斜：价格越低，愿意买的人越多。注意是「其他条件不变」的前提下。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["supply"],
+      "narration": "供给曲线向上倾斜：价格越高，厂商越愿意多生产。两条线斜率相反，迟早会撞上。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["zone", "eq"],
+      "narration": "交点就是均衡点。在这个价格上，想买的量和想卖的量正好相等，既没有短缺也没有过剩。",
+      "seconds": 11
+    }
+  ]
+}

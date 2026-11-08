@@ -1,0 +1,4 @@
+{"ts": 1792671557.546, "kind": "session_start", "data": {"subject": "语文", "stage": "", "grade": ""}}
+{"ts": 1792671557.546, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792671557.546, "kind": "quiz_asked", "data": {"question_id": "关于刚才讲的「古诗默写」，下面哪种做法最有助于真正学会它？"}}
+{"ts": 1792671557.547, "kind": "quiz_answered", "data": {"question_id": "关于刚才讲的「古诗默写」，下面哪种做法最有助于真正学会它？", "correct": true, "latency": 0.0}}

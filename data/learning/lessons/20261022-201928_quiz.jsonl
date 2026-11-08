@@ -1,0 +1,7 @@
+{"ts": 1792671568.667, "kind": "session_start", "data": {"subject": "数学", "stage": "junior", "grade": "初一"}}
+{"ts": 1792671568.668, "kind": "quiz_asked", "data": {"question_id": "下列事件不可能发生的是( ) A．打开电视机 B．明天会下雨 C．光比声音快 D"}}
+{"ts": 1792671568.668, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792671568.671, "kind": "quiz_asked", "data": {"question_id": "下列事件不可能发生的是( ) A．打开电视机 B．明天会下雨 C．光比声音快 D"}}
+{"ts": 1792671568.671, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792671568.674, "kind": "quiz_asked", "data": {"question_id": "下列事件不可能发生的是( ) A．打开电视机 B．明天会下雨 C．光比声音快 D"}}
+{"ts": 1792671568.675, "kind": "phase", "data": {"phase": "interaction"}}

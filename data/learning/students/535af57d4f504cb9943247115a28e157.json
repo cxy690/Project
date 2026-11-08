@@ -1,0 +1,56 @@
+{
+  "student_id": "535af57d4f504cb9943247115a28e157",
+  "updated_at": 1792649266.7258315,
+  "totals": {
+    "lessons": 3,
+    "avg_overall": 24.0,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261022-140355_2de20fc8a000",
+      "subject": "历史",
+      "stage": "",
+      "started_at": 1792649035.001943,
+      "completion_score": 48.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 25.4,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-135830_97a97a105fa9",
+      "subject": "历史",
+      "stage": "",
+      "started_at": 1792648710.3619664,
+      "completion_score": 49.7,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 25.9,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-134916_cc1919c6b754",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792648156.21568,
+      "completion_score": 34.8,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 20.7,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

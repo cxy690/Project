@@ -1,0 +1,9 @@
+{"ts": 1792736981.689, "kind": "session_start", "data": {"subject": "数学", "stage": "", "grade": ""}}
+{"ts": 1792736995.297, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792737042.539, "kind": "student_text", "data": {"text_len": 15, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792737042.54, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792737103.804, "kind": "student_text", "data": {"text_len": 12, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792737402.53, "kind": "student_text", "data": {"text_len": 6, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792737421.61, "kind": "student_text", "data": {"text_len": 9, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792737456.835, "kind": "student_text", "data": {"text_len": 9, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792737574.322, "kind": "session_end", "data": {"reason": "disconnect"}}

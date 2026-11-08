@@ -1,0 +1,41 @@
+{
+  "student_id": "8b0963722bd1454ea212ab64290eb2d7",
+  "updated_at": 1792648396.6829562,
+  "totals": {
+    "lessons": 2,
+    "avg_overall": 18.8,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261022-134955_f75ae904677c",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792648195.3913474,
+      "completion_score": 30.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 19.1,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-134812_4a50c127aaab",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792648092.5911992,
+      "completion_score": 28.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.5,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

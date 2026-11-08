@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>课程监控 · 管理员</title>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --line: #dedcd1;
+      --text: #141413;
+      --muted: #605e57;
+      --accent: #a84f35;
+      --ok: #087f5b;
+      --warn: #a6530b;
+      --bad: #b42318;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: radial-gradient(1100px 520px at 8% -12%, #f4e8df, transparent 60%), var(--bg);
+      color: var(--text); font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+    header {
+      max-width: 1440px; margin: auto; padding: 22px 28px 0; display: flex; align-items: center;
+      gap: 14px; flex-wrap: wrap;
+    }
+    header h1 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+    .eyebrow { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+    .links { margin-left: auto; display: flex; gap: 12px; flex-wrap: wrap; }
+    .links a { color: var(--muted); font-size: 13px; text-decoration: none; }
+    .links a:hover { color: var(--accent); }
+    .refresh {
+      border: 1px solid #e0c7b7; background: #f8eee8; color: var(--accent);
+      border-radius: 10px; padding: 9px 15px; font: inherit; cursor: pointer;
+    }
+    .refresh:disabled { opacity: .55; cursor: wait; }
+    main { max-width: 1440px; margin: 18px auto 48px; padding: 0 28px; display: grid; gap: 16px; }
+    .intro { color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .intro b { color: var(--text); }
+    .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+    .stat dt { color: var(--muted); font-size: 12px; }
+    .stat dd { margin: 6px 0 0; font-size: 26px; font-weight: 700; line-height: 1.2; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; overflow: hidden; }
+    .card-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .card-head h2 { margin: 0; font-size: 16px; }
+    #refresh-status { color: var(--muted); font-size: 12px; margin-left: auto; min-height: 18px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 1000px; }
+    th, td { text-align: left; padding: 11px 10px; border-bottom: 1px solid #efede5; font-size: 13px; white-space: nowrap; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; background: #fdfcf9; }
+    tr:last-child td { border-bottom: 0; }
+    .muted { color: var(--muted); }
+    .badge { display: inline-block; border-radius: 999px; padding: 2px 9px; border: 1px solid var(--line); font-size: 11.5px; }
+    .badge.ok { color: var(--ok); border-color: #bbf7d0; background: #f0fdf4; }
+    .badge.warn { color: var(--warn); border-color: #fde68a; background: #fffbeb; }
+    .badge.bad { color: var(--bad); border-color: #fecaca; background: #fef2f2; }
+    .gate { display: flex; justify-content: center; padding: 56px 16px; }
+    .gate-card { max-width: 480px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px; text-align: center; }
+    .gate-card h2 { margin: 0 0 8px; }
+    .gate-card p { color: var(--muted); font-size: 13px; line-height: 1.8; margin: 0 0 18px; }
+    .gate-card a { display: inline-flex; padding: 9px 18px; border-radius: 10px; background: var(--accent); color: #fff; text-decoration: none; }
+    .empty { text-align: center; color: var(--muted); padding: 36px 12px; font-size: 13px; }
+    @media (max-width: 720px) {
+      header { padding: 18px 16px 0; }
+      main { padding: 0 16px; }
+      .summary { grid-template-columns: 1fr; }
+      .links { width: 100%; margin-left: 0; }
+      .refresh { margin-left: auto; }
+    }
+    /* 被技能管理平台内嵌时：父级已有导航，隐藏本页独立顶栏 */
+    html.embed-mode header { display:none; }
+    html.embed-mode main { margin-top:0; padding-top:16px; }
+  </style>
+  <link rel="stylesheet" href="../shared/ui.css" />
+  <script defer src="../shared/ui.js"></script>
+  <script>
+    // 被技能管理平台内嵌时隐藏本页顶栏。
+    // 除了 ?embed=1，再加一条「只要身处 iframe 内就当作内嵌」的兜底：
+    // iframe 内部发生跳转时查询参数会丢失，只认 ?embed=1 会出现「两个顶栏」叠在一起。
+    if (new URLSearchParams(location.search).get("embed") === "1" || window.self !== window.top) {
+      document.documentElement.classList.add("embed-mode");
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header>
+    <div>
+      <div class="eyebrow">ADMIN · LIVE CLASSROOM</div>
+      <h1>课程监控</h1>
+    </div>
+    <div class="links">
+      <a href="../learning_center/index.html">学情分析</a>
+      <a href="../wechat_admin/index.html">微信助手</a>
+      <a href="../skill_admin/index.html">技能管理</a>
+      <a href="../user_center/index.html">用户中心</a>
+      <a href="../index.html">返回首页</a>
+    </div>
+    <button class="refresh" id="refresh" type="button">刷新</button>
+  </header>
+
+  <main id="main">
+    <p class="intro">
+      这里显示<b>正在进行的 1v1 课堂</b>。只统计仍有心跳或消息活动的会话；断线超过 60 秒的课堂会自动从列表消失。
+      数据每 10 秒刷新，只读，不会干预课堂。
+    </p>
+
+    <dl class="summary">
+      <div class="stat"><dt>进行中的课堂</dt><dd id="sum-active">—</dd></div>
+      <div class="stat"><dt>在场学生</dt><dd id="sum-students">—</dd></div>
+      <div class="stat"><dt>已超时</dt><dd id="sum-overtime">—</dd></div>
+    </dl>
+
+    <section class="card" aria-labelledby="courses-title">
+      <div class="card-head">
+        <h2 id="courses-title">实时课堂</h2>
+        <span class="muted" id="refresh-status" role="status" aria-live="polite">正在读取…</span>
+      </div>
+      <div class="table-wrap">
+        <table aria-label="正在进行的课堂">
+          <thead>
+            <tr>
+              <th>学生</th><th>学科 / 老师</th><th>学段 / 年级</th><th>阶段</th>
+              <th>已用 / 剩余</th><th>出题</th><th>学生回合</th><th>最后活动</th><th>状态</th>
+            </tr>
+          </thead>
+          <tbody id="course-rows">
+            <tr><td colspan="9" class="empty">正在加载…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="gate" id="gate" hidden>
+      <div class="gate-card">
+        <h2 id="gate-title">需要管理员登录</h2>
+        <p id="gate-desc">课程监控仅对管理员开放，请先登录管理员账号。</p>
+        <a id="gate-login" href="/app/login/?next=/app/admin_courses/">去登录</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let timer = null;
+    let loading = false;
+
+    function auth() {
+      try { return JSON.parse(localStorage.getItem("edu_auth") || "null"); } catch (e) { return null; }
+    }
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (c) => (
+        { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+      ));
+    }
+    function duration(seconds) {
+      const s = Math.max(0, Number(seconds) || 0);
+      return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+    }
+    function ago(ts) {
+      if (!ts) return "—";
+      const secs = Math.max(0, Date.now() / 1000 - Number(ts));
+      if (secs < 60) return Math.floor(secs) + " 秒前";
+      if (secs < 3600) return Math.floor(secs / 60) + " 分钟前";
+      return Math.floor(secs / 3600) + " 小时前";
+    }
+    function statusBadge(row) {
+      if (row.status === "overtime") return '<span class="badge bad">已超时</span>';
+      return '<span class="badge ok">进行中</span>';
+    }
+
+    function showGate(title, desc) {
+      $("gate-title").textContent = title;
+      $("gate-desc").textContent = desc;
+      $("gate").hidden = false;
+      $("course-rows").innerHTML = '';
+      $("refresh-status").textContent = "";
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+    function hideGate() { $("gate").hidden = true; }
+
+    async function api(path) {
+      const a = auth();
+      if (!a || !a.token) return null;
+      return fetch(path, { headers: { Authorization: "Bearer " + a.token } });
+    }
+
+    function renderRows(rows) {
+      const body = $("course-rows");
+      if (!rows.length) {
+        body.innerHTML = '<tr><td colspan="9" class="empty">当前没有正在进行的课堂。学生进入课堂并点击开始上课后会出现在这里。</td></tr>';
+        return;
+      }
+      body.innerHTML = rows.map((row) => {
+        const teacher = row.teacher ? " · " + row.teacher : "";
+        const stage = [row.stage_label, row.grade].filter(Boolean).join(" · ") || "—";
+        return '<tr>'
+          + '<td><b>' + esc(row.student_id || "匿名") + '</b></td>'
+          + '<td>' + esc(row.subject || "综合") + esc(teacher) + '</td>'
+          + '<td>' + esc(stage) + '</td>'
+          + '<td>' + esc(row.phase_label || row.phase || "—") + '</td>'
+          + '<td>' + esc(duration(row.elapsed_seconds)) + ' / ' + esc(duration(row.remaining_seconds)) + '</td>'
+          + '<td>' + esc(row.quiz_count ?? 0) + '</td>'
+          + '<td>' + esc(row.student_turns ?? 0) + '</td>'
+          + '<td>' + esc(ago(row.last_active_at)) + '</td>'
+          + '<td>' + statusBadge(row) + '</td>'
+          + '</tr>';
+      }).join("");
+    }
+
+    async function load() {
+      if (loading) return;
+      loading = true;
+      $("refresh").disabled = true;
+      $("refresh-status").textContent = "正在刷新…";
+      try {
+        const resp = await api("/api/admin/courses");
+        if (!resp) {
+          showGate("需要管理员登录", "课程监控仅对管理员开放，请先登录管理员账号。");
+          return;
+        }
+        if (resp.status === 401 || resp.status === 403) {
+          let detail = "仅管理员可访问课程监控。";
+          try { detail = (await resp.json()).detail || detail; } catch (e) { /* ignore */ }
+          showGate(resp.status === 401 ? "需要管理员登录" : "无权访问", detail);
+          return;
+        }
+        const data = await resp.json();
+        if (!resp.ok || !data.ok) throw new Error(data.detail || ("HTTP " + resp.status));
+        hideGate();
+        $("sum-active").textContent = data.summary?.active ?? 0;
+        $("sum-students").textContent = data.summary?.students ?? 0;
+        $("sum-overtime").textContent = data.summary?.overtime ?? 0;
+        renderRows(data.courses || []);
+        $("refresh-status").textContent = "刷新于 " + new Date().toLocaleTimeString("zh-CN", { hour12: false });
+      } catch (err) {
+        $("refresh-status").textContent = "加载失败：" + (err.message || err);
+      } finally {
+        loading = false;
+        $("refresh").disabled = false;
+      }
+    }
+
+    $("refresh").onclick = load;
+    load();
+    timer = setInterval(() => { if (!document.hidden) load(); }, 10000);
+  </script>
+</body>
+</html>

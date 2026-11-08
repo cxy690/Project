@@ -1,0 +1,5 @@
+{"ts": 1792727333.205, "kind": "session_start", "data": {"subject": "地理", "stage": "junior", "grade": "初二"}}
+{"ts": 1792727356.413, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792729134.873, "kind": "quiz_asked", "data": {"question_id": "咱们平时说的“地理”，主要研究的是啥？"}}
+{"ts": 1792729155.568, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792735026.152, "kind": "session_end", "data": {"reason": "disconnect"}}

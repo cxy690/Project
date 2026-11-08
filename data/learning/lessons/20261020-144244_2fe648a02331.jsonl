@@ -1,0 +1,4 @@
+{"ts": 1792478564.503, "kind": "session_start", "data": {"subject": "语文", "stage": "junior", "grade": "初二"}}
+{"ts": 1792478574.385, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792478669.536, "kind": "student_text", "data": {"text_len": 8, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792478767.614, "kind": "session_end", "data": {"reason": "disconnect"}}

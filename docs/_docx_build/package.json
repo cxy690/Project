@@ -1,0 +1,9 @@
+{
+  "name": "handout-docx-build",
+  "private": true,
+  "version": "1.0.0",
+  "description": "把 docs/答辩要点_源文本.txt 转成 A4 可打印 Word",
+  "dependencies": {
+    "docx": "^9.0.0"
+  }
+}

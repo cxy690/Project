@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />  <!-- 显式空图标：避免浏览器请求 /favicon.ico 产生 404 噪音 -->
+  <title>AI 教师系统 · 监控控制台</title>
+  <style>
+    body { margin:0; font-family:"Microsoft YaHei", system-ui, sans-serif; background:#faf9f5; color:#141413; }
+    header { padding:14px 20px; border-bottom:1px solid #dedcd1; display:flex; align-items:center; gap:12px; }
+    header h1 { font-size:16px; margin:0; }
+    main { display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:20px; }
+    .card { background:#ffffff; border:1px solid #dedcd1; border-radius:12px; padding:16px 20px; }
+    .card h2 { font-size:14px; margin:0 0 12px; color:#a84f35; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    td { padding:6px 4px; border-bottom:1px solid #e5eaf1; }
+    td:first-child { color:#605e57; width:55%; }
+    code { color:#b42318; }
+    a.back { margin-left:auto; color:#a84f35; text-decoration:none; }
+    .badge { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; white-space:nowrap; }
+    .badge.crisis  { background:#feeceb; color:#a51d27; }
+    .badge.unsafe  { background:#fff0e3; color:#964511; }
+    .badge.flagged { background:#fff5d8; color:#805708; }
+    .muted { color:#6c6961; font-size:12px; }
+    body { background:#faf9f5; }
+    header { max-width:1440px; margin:auto; padding:24px 32px; border-color:#dedcd1; flex-wrap:wrap; }
+    header h1 { font-size:20px; line-height:1.5; }
+    main { max-width:1440px; margin:auto; padding:28px 32px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; gap:24px; }
+    .intro { grid-column:1 / -1; }
+    .intro p { margin:8px 0 0; color:#605e57; font-size:14px; line-height:1.8; }
+    .eyebrow { color:#a84f35; font-size:12px; letter-spacing:.12em; font-weight:700; }
+    .card { min-width:0; border-color:#dedcd1; border-radius:18px; padding:24px; background:#ffffff; }
+    .card h2 { font-size:16px; margin-bottom:18px; line-height:1.7; }
+    .muted { color:#605e57; line-height:1.7; }
+    table { table-layout:fixed; }
+    td { padding:14px 8px; overflow-wrap:anywhere; vertical-align:top; line-height:1.7; border-color:#e5eaf1; }
+    td:first-child { color:#514f48; }
+    .badge { white-space:normal; margin:3px 0; line-height:1.7; }
+    .refresh { color:#a84f35; border:1px solid #dfc8b9; background:#f8eee8; border-radius:10px; padding:10px 16px; min-height:42px; }
+    .refresh:hover { background:#f1ded3; }
+    .refresh:disabled { opacity:.6; }
+    a.back { padding:10px 0; }
+    .overview { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:0; }
+    .overview > div { padding:18px 20px; border:1px solid var(--ui-border); border-radius:14px; background:var(--ui-surface); }
+    .overview dt { color:var(--ui-muted); font-size:13px; }
+    .overview dd { margin:8px 0 0; font-size:22px; font-weight:600; line-height:1.5; overflow-wrap:anywhere; }
+    .overview dd[data-state="ok"] { color:#166534; }
+    .overview dd[data-state="error"] { color:#b42318; }
+    .card h2 { color:var(--ui-text); }
+    #refresh-status { min-height:24px; }
+    @media(max-width:540px) { .overview { grid-template-columns:1fr; gap:10px; } .overview > div { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 16px; } .overview dd { margin:0; font-size:18px; } }
+    @media(max-width:900px) { main { grid-template-columns:minmax(0,1fr); padding:20px; gap:18px; } header { padding:20px; gap:10px 20px; } .card { padding:20px; } }
+    @media(max-width:480px) { header h1 { width:100%; } a.back { margin-left:0; margin-right:auto; } .card { padding:16px; } td { padding:12px 4px; } }
+    /* 被技能管理平台内嵌时：父级已有导航，隐藏本页独立顶栏 */
+    html.embed-mode header { display:none; }
+    html.embed-mode main { margin-top:0 !important; padding-top:16px; }
+  </style>
+  <link rel="stylesheet" href="../shared/ui.css" />
+  <script defer src="../shared/ui.js"></script>
+  <script>
+    // 被技能管理平台内嵌时隐藏本页顶栏；iframe 内跳转会丢 ?embed=1，故补 iframe 判断兜底
+    if (new URLSearchParams(location.search).get("embed") === "1" || window.self !== window.top) {
+      document.documentElement.classList.add("embed-mode");
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>AI 教师系统 · 监控控制台</h1>
+    <a class="back" href="../learning_center/index.html" style="margin-left:auto">学情分析</a>
+    <a class="back" href="../admin_courses/index.html" style="margin-left:0">课程监控（管理员）</a>
+    <a class="back" href="../index.html" style="margin-left:0">← 返回首页</a>
+    <button class="refresh" id="refresh" type="button">刷新数据</button>
+  </header>
+  <main id="main-content">
+    <section class="intro" aria-label="控制台说明">
+      <span class="eyebrow">WORKSPACE · 运行概览</span>
+      <p>查看可用工具与最近的安全事件。安全事件每 15 秒自动刷新，也可手动更新。</p>
+      <p id="refresh-status" role="status" aria-live="polite"></p>
+    </section>
+    <dl class="overview" aria-label="运行摘要">
+      <div><dt>应用服务</dt><dd id="service-state">检查中…</dd></div>
+      <div><dt>可用工具</dt><dd id="tool-count">—</dd></div>
+      <div><dt>最近成功刷新</dt><dd id="last-updated">尚未更新</dd></div>
+    </dl>
+    <div class="card">
+      <h2>可用工具（MCP）</h2>
+      <table id="tools" aria-label="可用工具清单"><tr><td class="muted" colspan="2">正在加载工具清单…</td></tr></table>
+    </div>
+    <div class="card">
+      <h2>安全事件（危机 / 敏感）<span class="muted" id="safety-meta"></span></h2>
+      <table id="safety" aria-label="最近的安全事件">
+        <tr><td class="muted">加载中…</td><td></td></tr>
+      </table>
+    </div>
+  </main>
+  <script>
+    // 事件内容来自学生输入与模型输出，必须转义后再拼 HTML，否则是一个 XSS 入口
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+    ));
+
+    function badges(ev) {
+      const out = [];
+      if (ev.crisis && ev.crisis.length) out.push(`<span class="badge crisis">危机 ${esc(ev.crisis.join(" / "))}</span>`);
+      if (ev.unsafe && ev.unsafe.length) out.push(`<span class="badge unsafe">不当用语</span>`);
+      if (ev.flagged && ev.flagged.length) out.push(`<span class="badge flagged">敏感 ${esc(ev.flagged.join(" / "))}</span>`);
+      return out.join(" ") || '<span class="muted">—</span>';
+    }
+
+    async function load() {
+      try {
+        const response = await fetch("/api/tools", { signal: AbortSignal.timeout(12000) });
+        if (!response.ok) throw new Error(String(response.status));
+        const tools = await response.json();
+        const tEl = document.getElementById("tools");
+        document.getElementById("tool-count").textContent = tools.tools.length + " 个";
+        tEl.innerHTML = tools.tools.length
+          ? tools.tools.map((t) => `<tr><td>${esc(t.name)}</td><td>${esc(t.description)}</td></tr>`).join("")
+          : '<tr><td class="muted" colspan="2">暂无可用工具</td></tr>';
+        return true;
+      } catch (e) {
+        document.getElementById("tool-count").textContent = "加载失败";
+        document.getElementById("tools").innerHTML = "<tr><td>无法连接服务端，请先启动 education-server</td></tr>";
+      }
+    }
+
+    async function loadSafety() {
+      const el = document.getElementById("safety");
+      const meta = document.getElementById("safety-meta");
+      try {
+        const response = await fetch("/api/safety/events?limit=50", { signal: AbortSignal.timeout(12000) });
+        if (!response.ok) throw new Error(String(response.status));
+        const data = await response.json();
+        meta.textContent = data.enabled ? `（最近 ${data.total} 条）` : "（审计已关闭）";
+        if (!data.events.length) {
+          el.innerHTML = '<tr><td class="muted">暂无安全事件</td><td></td></tr>';
+          return true;
+        }
+        el.innerHTML = data.events.map((ev) => `<tr>
+            <td>${esc(ev.ts_iso || "")} · ${esc(ev.source || "")}
+              <br><span class="muted">${esc(ev.text || "")}</span></td>
+            <td>${badges(ev)}</td>
+          </tr>`).join("");
+        return true;
+      } catch (e) {
+        meta.textContent = "（加载失败）";
+        el.innerHTML = '<tr><td class="muted">安全事件加载失败，请刷新重试</td><td></td></tr>';
+      }
+    }
+
+    async function loadHealth() {
+      const state = document.getElementById("service-state");
+      try {
+        const response = await fetch("/health", { signal: AbortSignal.timeout(12000) });
+        if (!response.ok) throw new Error(String(response.status));
+        const data = await response.json();
+        if (data.status !== "ok") throw new Error("unhealthy");
+        state.textContent = "运行正常";
+        state.dataset.state = "ok";
+        return true;
+      } catch (error) {
+        state.textContent = "暂不可用";
+        state.dataset.state = "error";
+        return false;
+      }
+    }
+
+    async function refreshAll() {
+      const button = document.getElementById("refresh");
+      if (button.disabled) return;
+      button.disabled = true;
+      button.textContent = "刷新中…";
+      try {
+        const results = await Promise.all([load(), loadSafety(), loadHealth()]);
+        const failed = ["工具清单", "安全事件", "应用健康检查"].filter((_, index) => !results[index]);
+        if (!failed.length) {
+          document.getElementById("last-updated").textContent = new Date().toLocaleTimeString("zh-CN");
+        }
+        document.getElementById("refresh-status").textContent = failed.length
+          ? failed.join("、") + "加载失败，请检查服务后重试。"
+          : "数据已更新。";
+      } finally {
+        button.disabled = false;
+        button.textContent = "刷新数据";
+      }
+    }
+    document.getElementById("refresh").addEventListener("click", refreshAll);
+    refreshAll();
+    setInterval(() => { if (!document.hidden) refreshAll(); }, 15000);   // 定期刷新：危机事件需要有人及时看到
+  </script>
+</body>
+</html>

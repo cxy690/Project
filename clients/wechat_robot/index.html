@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
+  <title>课程通知机器人 · 管理工作台</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./app.js" defer></script>
+  <link rel="stylesheet" href="../shared/ui.css" />
+  <script src="../shared/ui.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header>
+    <div><div class="eyebrow">COURSE NOTIFICATION · ADMIN</div><h1>课程通知机器人</h1></div>
+    <nav aria-label="管理导航"><a href="../wechat_admin/">用户微信通知</a><a href="../skill_admin/">管理工作台</a></nav>
+  </header>
+  <section id="gate" class="gate" hidden><h2 id="gate-title">需要管理员登录</h2><p id="gate-status" role="status">课程、家长群和发送时间仅允许管理员管理。</p><a id="login-link" class="button primary" href="../login/">管理员登录</a><button id="retry-load" type="button" hidden>重试加载</button></section>
+  <main id="main" hidden>
+    <section class="hero">
+      <div><span class="tag">按时段汇总 · 非实时群发</span><h2>让家长按时收到<br />孩子的上课安排</h2><p>先安排课程，再由机器人在指定星期、指定时间汇总未来课程。保存、改课和取消都不会立即发消息。</p></div>
+      <aside><strong>群通知与个人学情分开</strong><p>本页使用企业微信群机器人，不能直接向普通微信群发消息。家长服务号绑定仍在用户配置页管理。</p><p>仅发送课程时间、老师和上课地点，不发送成绩或个人学情。</p></aside>
+    </section>
+    <p id="global-status" class="banner" role="status" aria-live="polite"></p>
+    <div class="toolbar"><label class="grow">接收群 / 机器人<select id="robot-select"><option value="">新建接收群</option></select></label><button type="button" id="new-robot">新建接收群</button><button type="button" id="refresh">刷新列表</button></div>
+    <div class="grid">
+      <section class="card">
+        <div class="section-heading"><span class="step">01</span><div><h2>接收群与通知时间</h2><p>配置保存到数据库，重启后继续使用。</p></div><span id="robot-state" class="tag">未启用</span></div>
+        <form id="robot-form">
+          <div class="form-grid"><label>机器人 / 家长群名称<input id="robot-name" required maxlength="64" placeholder="例如：初一数学家长群" /></label><label>发送渠道<select id="channel"><option value="mock">本地模拟（不发微信）</option><option value="wecom_webhook">企业微信群机器人</option></select></label></div>
+          <label id="webhook-row" hidden>该群机器人的 Webhook<input id="webhook" type="password" autocomplete="new-password" maxlength="1024" placeholder="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=…" /><small id="webhook-hint">每个接收群配置独立目标，密钥不会回显。不使用全局共享地址。</small></label>
+          <div class="form-grid"><label>通知时间（逗号分隔，最多 8 个）<input id="send-times" value="08:00,18:00" required placeholder="08:00,12:30,18:00" /></label><label>通知时区<input id="timezone" value="Asia/Shanghai" required maxlength="64" list="timezones" /><datalist id="timezones"><option value="Asia/Shanghai"></option><option value="Asia/Hong_Kong"></option><option value="UTC"></option></datalist></label></div>
+          <fieldset><legend>通知星期</legend><div class="weekdays" id="weekdays"><label><input type="checkbox" value="1" checked />周一</label><label><input type="checkbox" value="2" checked />周二</label><label><input type="checkbox" value="3" checked />周三</label><label><input type="checkbox" value="4" checked />周四</label><label><input type="checkbox" value="5" checked />周五</label><label><input type="checkbox" value="6" checked />周六</label><label><input type="checkbox" value="7" checked />周日</label></div></fieldset>
+          <div class="form-grid"><label>汇总未来多少小时的课程<input id="lookahead" type="number" min="1" max="168" value="24" required /></label><label>错过时段后的补发窗口（分钟）<input id="grace" type="number" min="1" max="120" value="30" required /></label></div>
+          <label class="check"><input id="enabled" type="checkbox" />启用该群的定时通知</label>
+          <label class="check"><input id="audience-consent" type="checkbox" required />我确认本群接收者有权查看所排学生的课程信息，已核对接收范围。</label>
+          <p class="hint">新建默认停用；启用后只处理保存之后到达的时段。仅在补发窗口内补发，过期时段与历史日期不补发。停用后保留课程和记录。</p>
+          <button class="primary" type="submit">保存机器人与通知时间</button>
+        </form>
+      </section>
+      <section class="card">
+        <div class="section-heading"><span class="step">02</span><div><h2 id="course-form-title">安排学生课程</h2><p>时间按所选机器人的时区填写，不自动开始或扣减课时。</p></div></div>
+        <form id="course-form">
+          <input id="course-id" type="hidden" />
+          <label>课程名称<input id="course-title" required maxlength="80" placeholder="例如：一元一次方程复习" /></label>
+          <div class="form-grid"><label>上课时间<input id="starts-at" type="datetime-local" required /></label><label>结束时间<input id="ends-at" type="datetime-local" required /></label></div>
+          <label>UTC 偏移（选填，国内可留空）<input id="utc-offset" maxlength="6" placeholder="夏令时歧义时填写，例如 -05:00；国内通常留空" /></label>
+          <label>参与学生（可多选）<select id="students" multiple size="5" required aria-describedby="student-tip"></select><small id="student-tip">Windows 按 Ctrl 多选；仅选择家长属于该接收群的学生。不会自动把家长拉入群。</small></label>
+          <div class="form-grid"><label>授课老师<input id="teacher" maxlength="64" placeholder="选填" /></label><label>地点 / 上课入口<input id="location" maxlength="160" placeholder="例如：学习平板 · 数学课堂" /></label></div>
+          <label>课程备注<textarea id="note" maxlength="300" rows="3" placeholder="例如：提前 5 分钟准备课本和练习本"></textarea></label>
+          <div class="actions"><button class="primary" type="submit" id="save-course">保存课程安排</button><button type="button" id="reset-course">清空 / 退出编辑</button></div>
+          <p class="hint">取消的未来课程会在后续汇总中标记“已取消”。已发出的消息无法撤回；紧急改课请另行联系家长。</p>
+        </form>
+      </section>
+    </div>
+    <section class="card"><div class="section-heading"><span class="step">03</span><div><h2>课程安排</h2><p id="course-count">请先创建或选择接收群。</p></div></div><div class="table-wrap"><table><thead><tr><th>课程 / 学生</th><th>上课与结束时间</th><th>老师 / 地点</th><th>状态</th><th>操作</th></tr></thead><tbody id="course-rows"><tr><td colspan="5" class="empty">暂无课程</td></tr></tbody></table></div></section>
+    <div class="grid lower">
+      <section class="card"><div class="section-heading"><div><h2>下一时段预览</h2><p id="preview-time">仅预览，不发送消息。</p></div><button type="button" id="preview">刷新预览</button></div><pre id="preview-text">选择接收群后查看下一时段的课程通知。</pre><p class="hint">预览使用已保存的数据；发送时再读取最新课程。若通知被拆分，单时段最多 18 条，超出将记录失败，不截断丢失课程。</p></section>
+      <section class="card"><div class="section-heading"><div><h2>最近发送记录</h2><p>按“接收群 + 日期 + 时间”去重；不会每轮重复发。</p></div></div><div id="notice-rows" class="notice-list"><p class="empty">暂无发送记录</p></div><p class="hint">“渠道已受理”不代表家长已读。失败或进程中断不会自动重试，以免重复通知；请核对群消息后，在未来时段重新安排。</p></section>
+    </div>
+  </main>
+</body>
+</html>

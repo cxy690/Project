@@ -1,0 +1,7 @@
+{"ts": 1792665794.579, "kind": "session_start", "data": {"subject": "数学", "stage": "junior", "grade": "初二"}}
+{"ts": 1792665802.613, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792665819.435, "kind": "student_text", "data": {"text_len": 13, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792665819.437, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792667596.798, "kind": "quiz_asked", "data": {"question_id": "方程 2x + y = 4 画出来的图象是啥样的？"}}
+{"ts": 1792667608.575, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792669518.197, "kind": "session_end", "data": {"reason": "disconnect"}}

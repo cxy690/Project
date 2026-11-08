@@ -1,0 +1,26 @@
+{
+  "student_id": "gpu_probe",
+  "updated_at": 1792460582.9961886,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 32.1,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261020-094248_1c87230ba9e7",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792460568.5719755,
+      "completion_score": 10.2,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 32.1,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

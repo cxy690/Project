@@ -1,0 +1,29 @@
+{
+  "student_id": "stu-63240",
+  "updated_at": 1792482496.0190184,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 14.8,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261020-144808_e684d26767ba",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792478888.2750418,
+      "completion_score": 25.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 59.0,
+      "overall_score": 14.8,
+      "flags": [
+        "课堂中离场 2 次，累计 60 分钟",
+        "存在 5 分钟以上的静默空档，可能挂机",
+        "有效学习时长不足计划的三成",
+        "整节课学生几乎没有发言",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

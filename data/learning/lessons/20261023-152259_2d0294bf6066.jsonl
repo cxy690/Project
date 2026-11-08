@@ -1,0 +1,13 @@
+{"ts": 1792740179.71, "kind": "session_start", "data": {"subject": "数学", "stage": "", "grade": ""}}
+{"ts": 1792740182.254, "kind": "student_text", "data": {"text_len": 5, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740184.488, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792740184.489, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792740195.131, "kind": "student_text", "data": {"text_len": 5, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740220.812, "kind": "student_text", "data": {"text_len": 5, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740222.201, "kind": "student_text", "data": {"text_len": 5, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740261.472, "kind": "student_text", "data": {"text_len": 19, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740756.702, "kind": "student_text", "data": {"text_len": 19, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740809.346, "kind": "student_text", "data": {"text_len": 13, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740929.091, "kind": "student_text", "data": {"text_len": 17, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792740992.071, "kind": "student_text", "data": {"text_len": 8, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792741026.834, "kind": "session_end", "data": {"reason": "disconnect"}}

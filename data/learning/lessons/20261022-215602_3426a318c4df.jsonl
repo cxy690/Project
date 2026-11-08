@@ -1,0 +1,4 @@
+{"ts": 1792677362.477, "kind": "session_start", "data": {"subject": "历史", "stage": "", "grade": ""}}
+{"ts": 1792677371.001, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792677371.52, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792678762.355, "kind": "session_end", "data": {"reason": "disconnect"}}

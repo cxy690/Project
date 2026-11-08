@@ -1,0 +1,53 @@
+{
+  "title": "细胞的基本结构",
+  "subtitle": "初中生物 · 动物细胞的三大部分",
+  "type": "concept",
+  "canvas": "portrait",
+  "theme": "light",
+  "center": { "id": "cell", "text": "动物细胞" },
+  "branches": [
+    {
+      "id": "membrane",
+      "text": "细胞膜",
+      "children": [
+        { "id": "m1", "text": "控制物质进出，有选择透过性" }
+      ]
+    },
+    {
+      "id": "cyto",
+      "text": "细胞质",
+      "children": [
+        { "id": "c1", "text": "含线粒体等多种细胞器，是生命活动的主要场所" }
+      ]
+    },
+    {
+      "id": "nucleus",
+      "text": "细胞核",
+      "children": [
+        { "id": "n1", "text": "内含遗传物质 DNA，是细胞的控制中心" }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "reveal": ["cell"],
+      "narration": "把细胞拆开看，它由三大部分组成。我们从一个整体开始。",
+      "seconds": 6
+    },
+    {
+      "reveal": ["membrane", "m1"],
+      "narration": "最外层是细胞膜。它不是一堵死墙，而是有选择透过性的门卫——该进的进，该拦的拦。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["cyto", "c1"],
+      "narration": "膜以内、核以外是细胞质，里面泡着线粒体这类细胞器，细胞的大部分化学反应都在这里发生。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["nucleus", "n1"],
+      "narration": "最后是细胞核。DNA 就住在里面，它发出指令，决定这个细胞长成什么样、干什么活。",
+      "seconds": 9
+    }
+  ]
+}

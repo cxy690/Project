@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />  <!-- 显式空图标：避免浏览器请求 /favicon.ico 产生 404 噪音 -->
+  <title>AI 教师 1 对 1 实时答疑系统</title>
+  <style>
+    body { margin:0; font-family:"Microsoft YaHei", system-ui, sans-serif; background:#faf9f5; color:#141413; display:flex; min-height:100vh; align-items:center; justify-content:center; }
+    .card { background:#ffffff; border:1px solid #dedcd1; border-radius:16px; padding:36px 44px; max-width:640px; }
+    h1 { margin:0 0 8px; font-size:22px; }
+    p { color:#605e57; line-height:1.7; }
+    a.btn { display:inline-block; margin:8px 12px 0 0; padding:12px 20px; background:#a84f35; color:#fff; border-radius:10px; text-decoration:none; }
+    a.btn.ghost { color:#a84f35; background:#faf9f5; border:1px solid #dedcd1; }
+    body { background:#faf9f5; padding:clamp(20px,5vw,64px); }
+    .card { width:100%; max-width:1000px; padding:clamp(24px,6vw,72px); border-color:#dedcd1; border-radius:28px; background:linear-gradient(135deg,#ffffff,#f4f1e9); box-shadow:0 28px 80px #514b3412; }
+    .eyebrow { color:#a84f35; font-size:12px; letter-spacing:.14em; font-weight:700; margin-bottom:24px; }
+    h1 { font-size:clamp(30px,5vw,56px); line-height:1.3; letter-spacing:-.035em; }
+    h1 span { color:var(--ui-accent); }
+    p { max-width:640px; font-size:16px; color:#605e57; margin:20px 0 30px; }
+    .features { display:flex; flex-wrap:wrap; gap:16px 28px; list-style:none; padding:0 0 28px; margin:0 0 24px; border-bottom:1px solid #dedcd1; color:#514f48; font-size:14px; }
+    .features b { color:#a84f35; margin-right:8px; font-size:12px; }
+    .actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+    a.btn { margin:0; min-height:48px; display:inline-flex; gap:20px; align-items:center; justify-content:center; font-weight:600; background:#a84f35; }
+    a.btn:hover { background:#8f402b; }
+    a.btn.ghost:hover { background:#f1e5db; }
+    .console-link { color:#605e57; font-size:13px; padding:12px 0; margin-left:auto; text-underline-offset:4px; }
+    .footnote { margin-top:28px; color:#605e57; font-size:12px; line-height:1.8; }
+    @media(max-width:540px) { .actions { align-items:stretch; flex-direction:column; } .console-link { margin-left:0; } .features { flex-direction:column; gap:14px; } }
+  </style>
+  <link rel="stylesheet" href="./shared/ui.css" />
+  <script defer src="./shared/ui.js"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">AI LEARNING · 智能学习空间</div>
+    <h1>每一次提问，<br /><span>都是进步的开始。</span></h1>
+    <p>
+      与 AI 教师开启一对一学习：选一个学科，带着问题进入课堂。
+      用语音交流，在共享白板上梳理思路，让知识一步步变得清晰。
+    </p>
+    <ul class="features"><li><b>01</b> 按学科选择教师</li><li><b>02</b> 语音与白板协作</li><li><b>03</b> 随时提问与练习</li></ul>
+    <nav aria-label="平台入口" class="actions">
+      <a class="btn" href="./subject_select/index.html">选择学科，开始学习 <span aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="./login/index.html">登录 / 注册</a>
+      <a class="btn ghost" href="./user_center/index.html">用户中心</a>
+      <a class="btn ghost" href="./learning_center/index.html">学情分析</a>
+      <a class="console-link" href="./teacher_web/index.html">进入监控控制台 ↗</a>
+    </nav>
+    <div class="footnote">AI 辅助学习 · 支持电脑与平板 · 语音功能需 HTTPS 或本机访问</div>
+  </div>
+</body>
+</html>

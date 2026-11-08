@@ -1,0 +1,48 @@
+{
+  "title": "二次函数 y = x² − 2x − 3",
+  "subtitle": "初中数学 · 顶点、对称轴与零点",
+  "type": "curve",
+  "canvas": "landscape",
+  "theme": "light",
+  "font_size": 30,
+  "axes": {
+    "style": "cross",
+    "x": { "label": "x", "min": -3, "max": 5 },
+    "y": { "label": "y", "min": -5.5, "max": 4, "ticks": [-4, -2, 0, 2, 4] }
+  },
+  "curves": [
+    {
+      "id": "parabola",
+      "label": "y = x² − 2x − 3",
+      "fn": "x^2 - 2*x - 3",
+      "color": "#2F6FED",
+      "width": 5,
+      "label_at": [3.9, 2.5]
+    }
+  ],
+  "guides": [
+    { "id": "sym", "type": "v", "at": 1, "label": "对称轴 x = 1", "color": "#8D9AA8" }
+  ],
+  "markers": [
+    { "id": "vertex", "x": 1, "y": -4, "text": "顶点 (1, −4)", "color": "#E05252" },
+    { "id": "root1", "x": -1, "y": 0, "text": "x = −1" },
+    { "id": "root2", "x": 3, "y": 0, "text": "x = 3" }
+  ],
+  "steps": [
+    {
+      "reveal": ["parabola"],
+      "narration": "先看它的形状：开口向上，最低处就是顶点。这类图像我们叫抛物线。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["sym", "vertex"],
+      "narration": "对称轴是 x = 1，顶点落在对称轴上，坐标 (1, −4)。找顶点最稳的办法就是配方：y = (x−1)² − 4。",
+      "seconds": 13
+    },
+    {
+      "reveal": ["root1", "root2"],
+      "narration": "图像穿过横轴的两处就是零点。令 y = 0 解方程，得到 x = −1 和 x = 3，正好和图对得上。",
+      "seconds": 12
+    }
+  ]
+}

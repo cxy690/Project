@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>学情分析 · AI 教师监控</title>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --line: #dedcd1;
+      --text: #141413;
+      --muted: #605e57;
+      --accent: #a84f35;
+      --ok: #087f5b;
+      --warn: #92400e;
+      --danger: #b42318;
+      --info: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(1100px 500px at 5% -10%, #f4e8df 0%, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .topbar {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .topbar h1 { margin: 0; font-size: 20px; line-height: 1.5; }
+    .topbar .spacer { flex: 1; }
+    .topbar .link { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .topbar .link:hover { color: var(--accent); }
+    .wrap { width: min(1360px, calc(100% - 32px)); margin: 18px auto 48px; display: grid; gap: 16px; }
+    .card {
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: 0 16px 44px rgba(81, 75, 52, .06);
+    }
+    .eyebrow { margin: 0; color: var(--accent); font-size: 11.5px; font-weight: 700; letter-spacing: .14em; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .summary { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+    .summary > div { padding: 14px 16px; border: 1px solid #efede5; border-radius: 14px; background: #fdfcf9; }
+    .summary dt { color: var(--muted); font-size: 12px; }
+    .summary dd { margin: 5px 0 0; font-size: 25px; font-weight: 700; line-height: 1.3; }
+    .summary dd small { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .filters { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+    .filters label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
+    .filters input, .filters select {
+      min-height: 40px; padding: 8px 11px; border: 1px solid var(--line);
+      border-radius: 9px; background: #fdfcf9; color: var(--text); font: inherit; font-size: 13px;
+    }
+    .filters input { min-width: 220px; }
+    .btn {
+      min-height: 40px; padding: 8px 16px; border: 0; border-radius: 9px;
+      background: linear-gradient(180deg, var(--accent), #8f402b);
+      color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+    .btn.ghost { background: #fdfcf9; color: var(--muted); border: 1px solid var(--line); font-weight: 600; }
+    .btn.ghost:hover { background: #f4f1e9; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; min-width: 1040px; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #efede5; vertical-align: middle; }
+    th { color: var(--muted); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #fffaf6; }
+    .who { font-weight: 600; overflow-wrap: anywhere; }
+    .sub { color: var(--muted); font-size: 12px; }
+    .metric { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .bar { width: 58px; height: 6px; border-radius: 999px; background: #eeece3; overflow: hidden; }
+    .bar > i { display: block; height: 100%; width: var(--v, 0%); background: var(--accent); border-radius: inherit; }
+    .bar.ok > i { background: var(--ok); }
+    .bar.warn > i { background: var(--warn); }
+    .bar.bad > i { background: var(--danger); }
+    .status { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; white-space: nowrap; font-weight: 600; }
+    .status.completed { background: #e8f5ef; color: var(--ok); }
+    .status.attended_not_learned { background: #feeceb; color: var(--danger); }
+    .status.unverified { background: #f1f0eb; color: var(--muted); }
+    .status.partial { background: #fff5d8; color: var(--warn); }
+    .status.abandoned { background: #feeceb; color: var(--danger); }
+    .status.in_progress { background: #e8efff; color: var(--info); }
+    .view { border: 1px solid #dfc8b9; background: #f8eee8; color: var(--accent); border-radius: 8px; padding: 6px 11px; font: inherit; font-size: 12px; cursor: pointer; }
+    .view:hover { background: #f1ded3; }
+    .empty { padding: 38px 12px; text-align: center; color: var(--muted); }
+    .empty b { display: block; color: var(--text); margin-bottom: 4px; }
+    #status-line { min-height: 22px; margin: 8px 0 0; font-size: 12.5px; }
+    #status-line.err { color: var(--danger); }
+    #status-line.ok { color: var(--ok); }
+    .modal {
+      position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+      padding: 18px; background: rgba(20, 20, 19, .38);
+    }
+    .modal[hidden] { display: none; }
+    .sheet {
+      width: min(860px, 100%); max-height: min(88vh, 900px); overflow: auto;
+      background: var(--surface); border-radius: 18px; border: 1px solid var(--line);
+      box-shadow: 0 28px 80px rgba(20, 20, 19, .22); padding: 22px;
+    }
+    .sheet-head { display: flex; align-items: flex-start; gap: 12px; }
+    .sheet-head h2 { margin: 0; font-size: 19px; line-height: 1.45; }
+    .sheet-head .spacer { flex: 1; }
+    .icon-btn { border: 1px solid var(--line); background: #fdfcf9; color: var(--muted); border-radius: 8px; width: 36px; height: 36px; font-size: 17px; cursor: pointer; }
+    .detail-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
+    .detail-grid > div { padding: 11px 12px; border: 1px solid #efede5; border-radius: 11px; background: #fdfcf9; }
+    .detail-grid dt { color: var(--muted); font-size: 11px; }
+    .detail-grid dd { margin: 3px 0 0; font-size: 17px; font-weight: 700; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+    .chip { padding: 3px 9px; border-radius: 999px; background: #f4f1e9; color: var(--muted); font-size: 11.5px; }
+    .chip.flag { background: #fff5d8; color: var(--warn); }
+    .chip.flag.danger { background: #feeceb; color: var(--danger); }
+    .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid #eeece3; }
+    .timeline li { position: relative; padding: 0 0 13px 16px; }
+    .timeline li::before { content: ""; position: absolute; left: -5px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: #c9a08f; }
+    .timeline time { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+    .timeline .ev { font-size: 13px; overflow-wrap: anywhere; }
+    .timeline .ev b { color: var(--accent); font-weight: 600; }
+    @media (max-width: 1000px) {
+      .summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .topbar { padding: 16px 16px 0; }
+      .wrap { width: calc(100% - 20px); margin-top: 14px; }
+      .card { padding: 16px; }
+      .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .filters input { min-width: 0; width: 100%; }
+      .filters label { flex: 1 1 100%; }
+    }
+    /* 被技能管理平台内嵌时：父级已有导航，隐藏本页独立顶栏 */
+    html.embed-mode header { display:none; }
+    html.embed-mode main { margin-top:0 !important; padding-top:16px; }
+  </style>
+  <link rel="stylesheet" href="../shared/ui.css" />
+  <script defer src="../shared/ui.js"></script>
+  <script>
+    // 被技能管理平台内嵌时隐藏本页顶栏；iframe 内跳转会丢 ?embed=1，故补 iframe 判断兜底
+    if (new URLSearchParams(location.search).get("embed") === "1" || window.self !== window.top) {
+      document.documentElement.classList.add("embed-mode");
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="topbar">
+    <h1>学情分析 · AI 教师监控</h1>
+    <span class="spacer"></span>
+    <a class="link" href="../teacher_web/index.html">监控控制台</a>
+    <a class="link" href="../admin_courses/index.html">课程监控</a>
+    <a class="link" href="../wechat_admin/index.html">微信助手</a>
+    <a class="link" href="../user_center/index.html">用户中心</a>
+    <a class="link" href="../login/index.html">登录</a>
+    <a class="link" href="../index.html">返回首页</a>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="card" aria-labelledby="summary-title">
+      <p class="eyebrow">LEARNING ANALYTICS</p>
+      <h2 id="summary-title" style="margin:2px 0 12px;font-size:18px;">最近课堂概览</h2>
+      <dl class="summary">
+        <div><dt>课程数</dt><dd id="sum-sessions">—</dd></div>
+        <div><dt>完成学习</dt><dd id="sum-completed">—</dd></div>
+        <div><dt>平均课时完成</dt><dd id="sum-completion">—</dd></div>
+        <div><dt>平均掌握度</dt><dd id="sum-mastery">—</dd></div>
+        <div><dt>平均互动率</dt><dd id="sum-interaction">—</dd></div>
+      </dl>
+    </section>
+
+    <section class="card" aria-labelledby="list-title">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+        <div>
+          <p class="eyebrow">COURSE REPORTS</p>
+          <h2 id="list-title" style="margin:2px 0 0;font-size:18px;">单节课学情</h2>
+        </div>
+        <span class="spacer" style="flex:1"></span>
+        <button class="btn ghost" id="refresh" type="button">刷新</button>
+      </div>
+
+      <div class="filters">
+        <label id="student-filter-wrap">学生 ID
+          <input id="student-filter" type="text" placeholder="留空 = 全部学生" autocomplete="off" />
+        </label>
+        <label>回看范围
+          <select id="days-filter">
+            <option value="7">最近 7 天</option>
+            <option value="30" selected>最近 30 天</option>
+            <option value="90">最近 90 天</option>
+          </select>
+        </label>
+        <label>显示条数
+          <select id="limit-filter">
+            <option value="50" selected>50 条</option>
+            <option value="100">100 条</option>
+            <option value="200">200 条</option>
+          </select>
+        </label>
+        <button class="btn" id="apply" type="button">查询</button>
+      </div>
+      <p id="status-line" role="status" aria-live="polite"></p>
+
+      <div class="table-wrap">
+        <table aria-label="课堂学情报告">
+          <thead>
+            <tr>
+              <th>开始时间</th>
+              <th>学生</th>
+              <th>学科 / 学段</th>
+              <th>有效时长</th>
+              <th>课时完成</th>
+              <th>学习掌握</th>
+              <th>互动率</th>
+              <th>状态</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="report-body">
+            <tr><td colspan="9" class="empty">正在加载学情报告…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin:12px 0 0;">
+        口径：课时完成 = 有效在场 + 阶段到达 + 出题作答；学习掌握 = 首次作答正确率；互动率 = 响应率 + 主动提问 + 有效互动。
+        没有作答证据的课堂会标记「未验证」，不默认算完成。
+      </p>
+    </section>
+  </main>
+
+  <div class="modal" id="detail-modal" hidden>
+    <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <div class="sheet-head">
+        <div>
+          <p class="eyebrow" style="margin:0 0 4px;">SESSION REPORT</p>
+          <h2 id="detail-title">课堂详情</h2>
+          <p class="muted" id="detail-meta" style="margin:4px 0 0;"></p>
+        </div>
+        <span class="spacer"></span>
+        <button class="icon-btn" id="close-detail" type="button" aria-label="关闭详情" data-dialog-close>×</button>
+      </div>
+      <div id="detail-body"></div>
+    </section>
+  </div>
+
+  <script>
+    const AUTH_KEY = "edu_auth";
+    const ROLE = { student: "学生", parent: "家长", teacher: "教师", admin: "管理员" };
+    const STAGE = { primary: "小学", junior: "初中" };
+    const EVENT_LABEL = {
+      session_start: "会话开始",
+      session_end: "会话结束",
+      course_start: "开始上课",
+      course_end: "课程结束",
+      phase_change: "阶段切换",
+      ai_quiz: "出题",
+      ai_ask: "追问",
+      ai_check: "判题",
+      student_turn: "学生输入",
+      crisis_alert: "安全提醒",
+    };
+    const PHASE_LABEL = { opening: "问候热身", lecture: "知识点讲解", interaction: "互动出题", summary: "总结答疑", ended: "已结束" };
+    const FLAG_LABEL = {
+      no_quiz: "未出题", no_answer: "未作答", low_interaction: "互动偏低",
+      low_mastery: "掌握偏低", no_summary: "未到总结", left_early: "提前离开",
+      no_heartbeat: "无心跳", no_course_start: "未开始上课", safety_alert: "安全提醒",
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]
+    ));
+    const pct = (value) => (typeof value === "number" ? Math.round(value * 100) + "%" : "—");
+    const duration = (seconds) => {
+      const n = Math.max(0, Math.round(Number(seconds) || 0));
+      return Math.floor(n / 60) + "分" + String(n % 60).padStart(2, "0") + "秒";
+    };
+    const timeText = (ts) => {
+      if (!ts) return "—";
+      const d = new Date(Number(ts) * 1000);
+      if (!Number.isFinite(d.getTime())) return "—";
+      return d.toLocaleString("zh-CN", { hour12: false });
+    };
+
+    function readAuth() {
+      try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); } catch (e) { return null; }
+    }
+    const AUTH = readAuth();
+    const USER = AUTH && AUTH.user ? AUTH.user : null;
+    const IS_STAFF = !!USER && USER.role === "admin";
+    let loading = false;
+
+    function setStatus(text, kind) {
+      const el = $("status-line");
+      el.textContent = text || "";
+      el.className = kind || "";
+    }
+
+    async function api(path) {
+      const headers = {};
+      if (AUTH && AUTH.token) headers.Authorization = "Bearer " + AUTH.token;
+      const resp = await fetch(path, { headers });
+      const data = await resp.json().catch(() => ({}));
+      if (resp.status === 401) {
+        throw new Error("需要登录：请先到登录页登录后再查看学情");
+      }
+      if (!resp.ok) throw new Error(data.detail || ("HTTP " + resp.status));
+      return data;
+    }
+
+    function metricCell(value, className) {
+      const n = typeof value === "number" ? Math.max(0, Math.min(1, value)) : 0;
+      const cls = className || (n >= 0.8 ? "ok" : n >= 0.5 ? "warn" : "bad");
+      return '<div class="metric"><span>' + pct(value) + '</span><span class="bar ' + cls + '"><i style="--v:' + Math.round(n * 100) + '%"></i></span></div>';
+    }
+
+    function renderSummary(summary) {
+      const s = summary || {};
+      $("sum-sessions").textContent = s.sessions ?? 0;
+      $("sum-completed").innerHTML = (s.completed ?? 0) + ' <small>/ ' + (s.sessions ?? 0) + ' 节</small>';
+      $("sum-completion").textContent = pct(s.completion_rate);
+      $("sum-mastery").textContent = pct(s.mastery);
+      $("sum-interaction").textContent = pct(s.interaction_rate);
+    }
+
+    function renderRows(reports) {
+      const body = $("report-body");
+      if (!reports || !reports.length) {
+        body.innerHTML = '<tr><td colspan="9" class="empty"><b>暂无学情报告</b>学生进入课堂并产生互动后，这里会生成报告。</td></tr>';
+        return;
+      }
+      body.innerHTML = reports.map((r) => {
+        const stage = STAGE[r.stage] || r.stage || "";
+        const subject = [r.subject || "—", stage].filter(Boolean).join(" · ");
+        return '<tr>'
+          + '<td><div class="who">' + esc(timeText(r.started_at)) + '</div><div class="sub">' + (r.ended ? "已结束" : "进行中") + '</div></td>'
+          + '<td><div class="who">' + esc(r.student_id || "—") + '</div><div class="sub">' + esc(r.teacher || "") + '</div></td>'
+          + '<td>' + esc(subject) + '</td>'
+          + '<td><div class="who">' + duration(r.active_seconds) + '</div><div class="sub">计划 ' + duration(r.planned_seconds) + '</div></td>'
+          + '<td>' + metricCell(r.completion_rate) + '</td>'
+          + '<td>' + (r.mastery == null ? '<span class="sub">未验证</span>' : metricCell(r.mastery)) + '</td>'
+          + '<td>' + metricCell(r.interaction_rate) + '</td>'
+          + '<td><span class="status ' + esc(r.status || "") + '">' + esc(r.status_label || r.status || "—") + '</span></td>'
+          + '<td><button class="view" type="button" data-session="' + esc(r.session_id || "") + '">查看</button></td>'
+          + '</tr>';
+      }).join("");
+    }
+
+    async function load(silent) {
+      if (loading) return;
+      loading = true;
+      $("apply").disabled = true;
+      $("refresh").disabled = true;
+      if (!silent) setStatus("正在加载…");
+      try {
+        const params = new URLSearchParams();
+        params.set("days", $("days-filter").value);
+        params.set("limit", $("limit-filter").value);
+        if (IS_STAFF) {
+          const sid = $("student-filter").value.trim();
+          if (sid) params.set("student_id", sid);
+        } else if (USER) {
+          const requested = new URLSearchParams(location.search).get("student_id");
+          params.set("student_id", requested || USER.id);
+        }
+        const data = await api("/api/learning/reports?" + params.toString());
+        renderSummary(data.summary);
+        renderRows(data.reports);
+        setStatus("已更新 · " + new Date().toLocaleTimeString("zh-CN", { hour12: false }), "ok");
+      } catch (err) {
+        setStatus(err.message || "加载失败", "err");
+        renderRows([]);
+      } finally {
+        loading = false;
+        $("apply").disabled = false;
+        $("refresh").disabled = false;
+      }
+    }
+
+    function eventSummary(event) {
+      const p = event.payload || {};
+      switch (event.event_type) {
+        case "phase_change":
+          return "进入「" + esc(PHASE_LABEL[p.phase] || p.phase || "—") + "」";
+        case "ai_quiz":
+          return "出题：" + esc(p.question || "—");
+        case "ai_ask":
+          return "追问：" + esc(p.question || "—");
+        case "ai_check":
+          return (p.correct ? "<b>答对</b>" : "<b>答错</b>") + " · 标准答案 " + esc(p.expected || "—");
+        case "student_turn":
+          return (p.is_answer ? "作答" : "提问") + "：" + esc(p.text || "（图片/语音）");
+        case "session_end":
+          return "离开课堂 · " + esc(p.reason || "—");
+        case "crisis_alert":
+          return "安全事件：" + esc((p.hits || []).join("、") || "—");
+        case "session_start":
+          return "会话开始 · 计划 " + duration(p.planned_seconds);
+        default:
+          return esc(event.event_type || "—");
+      }
+    }
+
+    function renderDetail(data) {
+      const r = data.report || {};
+      const flags = (r.flags || []).map((flag) => {
+        const danger = ["low_mastery", "safety_alert", "no_answer"].includes(flag);
+        return '<span class="chip flag ' + (danger ? "danger" : "") + '">' + esc(FLAG_LABEL[flag] || flag) + '</span>';
+      }).join("");
+      const phases = (r.phases || []).map((p) => '<span class="chip">' + esc(PHASE_LABEL[p] || p) + '</span>').join("");
+      const timeline = (data.events || []).slice(-120).reverse().map((event) => (
+        '<li><time>' + esc(timeText(event.ts)) + '</time>'
+        + '<div class="ev"><b>' + esc(EVENT_LABEL[event.event_type] || event.event_type) + '</b> · '
+        + eventSummary(event) + '</div></li>'
+      )).join("");
+
+      $("detail-title").textContent = "课堂详情 · " + (r.student_id || "未知学生");
+      $("detail-meta").textContent = [r.subject, STAGE[r.stage] || r.stage, r.ended ? "已结束" : "进行中", timeText(r.started_at)].filter(Boolean).join(" · ");
+      $("detail-body").innerHTML =
+        '<div class="chips"><span class="status ' + esc(r.status || "") + '">' + esc(r.status_label || r.status || "—") + '</span>'
+        + flags + '</div>'
+        + '<dl class="detail-grid">'
+        + '<div><dt>有效 / 计划</dt><dd>' + duration(r.active_seconds) + ' <small>/ ' + duration(r.planned_seconds) + '</small></dd></div>'
+        + '<div><dt>课时完成</dt><dd>' + pct(r.completion_rate) + '</dd></div>'
+        + '<div><dt>学习掌握</dt><dd>' + (r.mastery == null ? "未验证" : pct(r.mastery)) + '</dd></div>'
+        + '<div><dt>互动率</dt><dd>' + pct(r.interaction_rate) + '</dd></div>'
+        + '<div><dt>出题 / 作答</dt><dd>' + (r.quiz_issued ?? 0) + ' / ' + (r.quiz_answered ?? 0) + '</dd></div>'
+        + '<div><dt>首答正确</dt><dd>' + (r.first_attempts ? (r.correct_first + ' / ' + r.first_attempts) : "—") + '</dd></div>'
+        + '<div><dt>学生回合</dt><dd>' + (r.student_turns ?? 0) + '</dd></div>'
+        + '<div><dt>主动提问</dt><dd>' + (r.questions ?? 0) + '</dd></div>'
+        + '</dl>'
+        + '<p class="muted" style="margin:0 0 6px;">阶段</p><div class="chips">' + (phases || '<span class="chip">未记录</span>') + '</div>'
+        + '<p class="muted" style="margin:12px 0 6px;">事件时间线（心跳已折叠，共 ' + (data.heartbeat_count ?? 0) + ' 次）</p>'
+        + '<ul class="timeline">' + (timeline || '<li><div class="ev">暂无事件</div></li>') + '</ul>';
+    }
+
+    async function openDetail(sessionId) {
+      if (!sessionId) return;
+      $("detail-modal").hidden = false;
+      document.body.style.overflow = "hidden";
+      $("detail-body").innerHTML = '<p class="muted">正在加载…</p>';
+      try {
+        const data = await api("/api/learning/report/" + encodeURIComponent(sessionId));
+        renderDetail(data);
+      } catch (err) {
+        $("detail-body").innerHTML = '<p class="muted">' + esc(err.message || "加载失败") + '</p>';
+      }
+    }
+
+    function closeDetail() {
+      $("detail-modal").hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    $("apply").addEventListener("click", () => load(false));
+    $("refresh").addEventListener("click", () => load(false));
+    $("report-body").addEventListener("click", (event) => {
+      const btn = event.target.closest("button[data-session]");
+      if (btn) openDetail(btn.dataset.session);
+    });
+    $("close-detail").addEventListener("click", closeDetail);
+    $("detail-modal").addEventListener("click", (event) => {
+      if (event.target === $("detail-modal")) closeDetail();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !$("detail-modal").hidden) closeDetail();
+    });
+
+    if (!IS_STAFF) {
+      $("student-filter-wrap").hidden = true;
+    }
+    if (USER) {
+      $("student-filter").placeholder = IS_STAFF ? "留空 = 全部学生" : "只看我的学情";
+    }
+    load(false);
+    // 智能监控：页面可见时每 30 秒静默刷新；切后台不做无意义请求。
+    setInterval(() => { if (document.visibilityState === "visible") load(true); }, 30000);
+  </script>
+</body>
+</html>

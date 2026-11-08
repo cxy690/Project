@@ -1,0 +1,27 @@
+{
+  "spec": "/root/autodl-tmp/education/data/diagrams/20261022-184422_linear_equation_graph/spec.json",
+  "spec_sha256": "d8bc8bb80830c39e01662230ba381c0b2c3d38c4adec640db121718bfa6a1bc7",
+  "diagram_type": "curve",
+  "canvas": {
+    "preset": "square",
+    "width": 1080,
+    "height": 1080
+  },
+  "theme": "light",
+  "safe_area": "none",
+  "scale": 2,
+  "grid": false,
+  "elements": 0,
+  "steps": 4,
+  "frames": 4,
+  "total_seconds": 20.0,
+  "fonts": [
+    "/root/autodl-tmp/education/.agents/tools/digital-teacher-diagram/assets/fonts/msyh.ttc",
+    "/root/autodl-tmp/education/.agents/tools/digital-teacher-diagram/assets/fonts/msyhbd.ttc",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+  ],
+  "warnings": [
+    "[warn] 强调色: 与画布底色对比度 4.36:1，低于 4.5:1，投影/手机端可能发虚"
+  ],
+  "generated_at": "2026-10-22T18:44:23"
+}

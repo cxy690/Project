@@ -1,0 +1,7 @@
+{"ts": 1792982482.154, "kind": "session_start", "data": {"subject": "数学", "stage": "junior", "grade": "初二"}}
+{"ts": 1792982496.685, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792982500.608, "kind": "student_text", "data": {"text_len": 21, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792982500.609, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792982638.848, "kind": "student_text", "data": {"text_len": 7, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792982660.413, "kind": "student_text", "data": {"text_len": 26, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792982703.72, "kind": "session_end", "data": {"reason": "disconnect"}}

@@ -1,0 +1,5 @@
+{"ts": 1792725413.805, "kind": "session_start", "data": {"subject": "地理", "stage": "junior", "grade": "初二"}}
+{"ts": 1792725433.519, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792727217.139, "kind": "quiz_asked", "data": {"question_id": "咱们平时说一个地方“四季分明”，主要跟下面哪个原因关系最大？"}}
+{"ts": 1792727233.664, "kind": "phase", "data": {"phase": "interaction"}}
+{"ts": 1792727323.334, "kind": "session_end", "data": {"reason": "disconnect"}}

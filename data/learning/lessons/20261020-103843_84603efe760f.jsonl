@@ -1,0 +1,5 @@
+{"ts": 1792463923.641, "kind": "session_start", "data": {"subject": "语文", "stage": "", "grade": ""}}
+{"ts": 1792463940.196, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792463958.468, "kind": "interrupt", "data": {}}
+{"ts": 1792463958.687, "kind": "student_text", "data": {"text_len": 0, "channel": "voice", "initiative": true, "latency": null}}
+{"ts": 1792463972.661, "kind": "session_end", "data": {"reason": "disconnect"}}

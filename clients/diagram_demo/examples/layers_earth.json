@@ -1,0 +1,41 @@
+{
+  "title": "地球的内部圈层",
+  "subtitle": "地理 · 从地表到地心",
+  "type": "layers",
+  "canvas": "portrait",
+  "theme": "blueprint",
+  "layers": [
+    { "id": "crust", "label": "地壳", "detail": "平均约 17 km，大陆厚海洋薄", "ratio": 0.9 },
+    { "id": "upper", "label": "上地幔", "detail": "约 1000 km，软流层是岩浆发源地", "ratio": 1.5 },
+    { "id": "lower", "label": "下地幔", "detail": "约 1900 km，压力极大", "ratio": 1.8 },
+    { "id": "outer", "label": "外核", "detail": "约 2200 km，液态铁镍流动产生地磁场", "ratio": 1.6, "color": "#FF8A65" },
+    { "id": "inner", "label": "内核", "detail": "半径约 1220 km，固态铁镍，约 5500 ℃", "ratio": 1.2, "color": "#FFD54F" }
+  ],
+  "steps": [
+    {
+      "reveal": ["crust"],
+      "narration": "我们脚踩的地壳只是薄薄一层，平均十几公里——相对地球半径，比鸡蛋壳还薄。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["upper"],
+      "narration": "往下是上地幔。其中有一层叫软流层，物质接近熔融状态，是火山岩浆的发源地。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["lower"],
+      "narration": "再往下是下地幔，压力大到物质性质都变了，这里的矿物和我们地表见到的完全不同。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["outer"],
+      "narration": "外核是液态的铁镍。它的流动像一台发电机，产生了保护地球的地磁场。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["inner"],
+      "narration": "最中心是内核，温度约 5500 摄氏度，和太阳表面差不多，但巨大压力让它保持固态。",
+      "seconds": 10
+    }
+  ]
+}

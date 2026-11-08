@@ -1,0 +1,41 @@
+{
+  "student_id": "stu-39575",
+  "updated_at": 1792758506.4171164,
+  "totals": {
+    "lessons": 2,
+    "avg_overall": 31.4,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261023-202815_648ada21ae59",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792758495.3312078,
+      "completion_score": 27.7,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.2,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261023-202725_648ada21ae59",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792758445.7663512,
+      "completion_score": 45.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.5,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

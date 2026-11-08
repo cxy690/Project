@@ -1,0 +1,176 @@
+{
+  "student_id": "93399092ce9040b89f267cfaa39ccea6",
+  "updated_at": 1792738011.9537382,
+  "totals": {
+    "lessons": 11,
+    "avg_overall": 32.6,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261023-144439_85c3db1cc491",
+      "subject": "生物",
+      "stage": "",
+      "started_at": 1792737879.5791638,
+      "completion_score": 46.9,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.9,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261023-144206_9f0cad90bc04",
+      "subject": "物理",
+      "stage": "",
+      "started_at": 1792737726.8297849,
+      "completion_score": 46.9,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.9,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261023-143949_0f34712adc2c",
+      "subject": "地理",
+      "stage": "",
+      "started_at": 1792737589.0312893,
+      "completion_score": 46.8,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.9,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261023-142941_f2e9e3b9f7b6",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792736981.6892056,
+      "completion_score": 53.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 47.3,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-160818_c3230aa51cfd",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792656498.1683784,
+      "completion_score": 51.7,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 26.6,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-160650_d3beb85f2ee8",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792656410.3820608,
+      "completion_score": 28.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.5,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-150048_51a8740073be",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792652448.174502,
+      "completion_score": 28.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.4,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-142532_1ef1dfe86288",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792650332.3778245,
+      "completion_score": 47.4,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 25.1,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-140406_f77d14ff4b77",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792649046.3533037,
+      "completion_score": 47.0,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 24.9,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-140314_5df18ad3075b",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792648994.1389487,
+      "completion_score": 45.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.5,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    },
+    {
+      "lesson_id": "20261022-113447_b7c2f4942170",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792640087.3455255,
+      "completion_score": 27.6,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.2,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

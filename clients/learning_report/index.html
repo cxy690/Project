@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学情分析 · AI 教师</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#fff; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb;
+    --brand:#1677ff; --ok:#16a34a; --warn:#f59e0b; --bad:#ef4444; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;
+         display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:9}
+  header h1{font-size:17px;margin:0;font-weight:600}
+  header .sp{flex:1}
+  input,button{font:inherit}
+  input[type=text]{padding:8px 12px;border:1px solid var(--line);border-radius:10px;
+                   outline:none;background:#fff;min-width:190px}
+  input[type=text]:focus{border-color:var(--brand)}
+  button{padding:8px 16px;border:none;border-radius:10px;background:var(--brand);
+         color:#fff;cursor:pointer}
+  button.ghost{background:#eef2ff;color:var(--brand)}
+  button:disabled{opacity:.5;cursor:default}
+  main{max-width:1120px;margin:0 auto;padding:22px}
+  .hint{color:var(--sub);font-size:13px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .card{background:var(--card);border-radius:var(--radius);padding:18px;
+        box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .card h3{margin:0 0 10px;font-size:14px;color:var(--sub);font-weight:500}
+  .big{font-size:30px;font-weight:700;letter-spacing:.5px}
+  .big small{font-size:13px;font-weight:400;color:var(--sub);margin-left:4px}
+  .bar{height:8px;background:#eef1f6;border-radius:99px;overflow:hidden;margin-top:12px}
+  .bar i{display:block;height:100%;border-radius:99px;background:var(--brand);width:0;
+         transition:width .5s ease}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+  .ring{width:118px;height:118px;border-radius:50%;display:grid;place-items:center;
+        background:conic-gradient(var(--brand) 0deg,#eef1f6 0deg);margin:4px auto 0}
+  .ring div{width:92px;height:92px;background:#fff;border-radius:50%;display:grid;
+            place-items:center;text-align:center;line-height:1.2}
+  .ring b{font-size:24px}
+  .ring span{font-size:11px;color:var(--sub)}
+  .flags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .flag{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;border-radius:99px;
+        padding:3px 10px;font-size:12px}
+  .list{margin-top:8px}
+  .row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);
+       cursor:pointer}
+  .row:last-child{border-bottom:none}
+  .row:hover{background:#fafcff}
+  .row .t{width:150px;color:var(--sub);font-size:13px}
+  .row .s{width:74px;font-weight:600}
+  .mini{flex:1;height:6px;background:#eef1f6;border-radius:99px;overflow:hidden}
+  .mini i{display:block;height:100%;background:var(--brand)}
+  .detail{margin-top:16px;display:none}
+  .detail.on{display:block}
+  .detail h2{font-size:16px;margin:0 0 6px}
+  .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+  .kv div{background:#f8fafc;border-radius:10px;padding:10px 12px}
+  .kv b{display:block;font-size:19px}
+  .kv span{font-size:12px;color:var(--sub)}
+  ul.plain{margin:6px 0;padding-left:20px}
+  ul.plain li{margin:4px 0}
+  .empty{padding:40px;text-align:center;color:var(--sub)}
+  @media(max-width:640px){main{padding:14px}.row .t{width:110px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>学情分析</h1>
+  <span class="sp"></span>
+  <span id="who" class="hint"></span>
+  <input id="sid" type="text" placeholder="学生 ID（教师可查任意学生）">
+  <button id="load">查看</button>
+  <button id="back" class="ghost" onclick="location.href='/app/subject_select/index.html'">返回选课</button>
+</header>
+
+<main>
+  <div id="empty" class="card empty">输入学生 ID 后点「查看」。</div>
+
+  <section id="main" style="display:none">
+    <div class="grid">
+      <div class="card">
+        <h3>综合评分</h3>
+        <div class="ring" id="ring"><div><b id="overall">--</b><span>综合 0—100</span></div></div>
+        <p id="headline" class="hint" style="text-align:center;margin:10px 0 0"></p>
+      </div>
+      <div class="card">
+        <h3>完课度 · 是否真的学完</h3>
+        <div class="big"><span id="completion">--</span><small>/100</small></div>
+        <div class="bar"><i id="completionBar"></i></div>
+        <p class="hint">时长覆盖 + 环节覆盖 + 收尾检测 + 出勤稳定</p>
+      </div>
+      <div class="card">
+        <h3>掌握度 · 会不会</h3>
+        <div class="big"><span id="mastery">--</span><small>/100</small></div>
+        <div class="bar"><i id="masteryBar"></i></div>
+        <p id="level" class="hint">首答正确率 · 订正正确率 · 出题覆盖</p>
+      </div>
+      <div class="card">
+        <h3>互动率 · 参与度</h3>
+        <div class="big"><span id="interaction">--</span><small>%</small></div>
+        <div class="bar"><i id="interactionBar"></i></div>
+        <p id="initiative" class="hint">学生发言 / 老师提问</p>
+      </div>
+      <div class="card">
+        <h3>学习真实性 · 是否挂机</h3>
+        <div class="big"><span id="authenticity">--</span><small>/100</small></div>
+        <div class="bar"><i id="authenticityBar"></i></div>
+        <p class="hint">离场时长 · 异常快速作答 · 静默空档</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>待关注</h3>
+      <div id="flags" class="flags"><span class="hint">暂无</span></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>最近课次（点击查看课后报告）</h3>
+      <div id="lessons" class="list"></div>
+    </div>
+
+    <div id="detail" class="card detail">
+      <h2 id="dTitle">课后报告</h2>
+      <p id="dHead" class="hint"></p>
+      <div class="kv" id="dKv"></div>
+      <div class="grid" style="grid-template-columns:1fr 1fr">
+        <div><h3>做得好的</h3><ul id="dGood" class="plain"></ul></div>
+        <div><h3>待改进</h3><ul id="dBad" class="plain"></ul></div>
+      </div>
+      <h3>下一步建议</h3>
+      <ul id="dNext" class="plain"></ul>
+      <h3>家长版摘要</h3>
+      <p id="dParent" class="hint"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+const AUTH_KEY = "edu_auth";
+const $ = (id) => document.getElementById(id);
+
+function auth() {
+  try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); }
+  catch (e) { return null; }
+}
+function headers() {
+  const a = auth();
+  return a && a.token ? { "Authorization": "Bearer " + a.token } : {};
+}
+function currentUser() { const a = auth(); return (a && a.user) || null; }
+
+function pct(v) { return Math.round((Number(v) || 0) * 100); }
+function cls(v, ok, warn) {
+  const n = Number(v) || 0;
+  if (n >= ok) return "ok";
+  if (n >= warn) return "warn";
+  return "bad";
+}
+function bar(el, v, max, color) {
+  const p = Math.max(0, Math.min(100, (Number(v) || 0) / (max || 100) * 100));
+  el.style.width = p + "%";
+  if (color) el.style.background = color;
+}
+function colorOf(v) {
+  const n = Number(v) || 0;
+  return n >= 80 ? "#16a34a" : n >= 60 ? "#f59e0b" : "#ef4444";
+}
+function fmtTime(ts) {
+  if (!ts) return "--";
+  const d = new Date(ts * 1000);
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getMonth() + 1}/${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+async function api(path) {
+  const r = await fetch(path, { headers: headers() });
+  if (!r.ok) {
+    const t = await r.text();
+    throw new Error(`HTTP ${r.status} ${t.slice(0, 120)}`);
+  }
+  return r.json();
+}
+
+function renderStudent(data) {
+  $("empty").style.display = "none";
+  $("main").style.display = "block";
+  const s = data.summary || {};
+  const lessons = data.lessons || [];
+  const latest = lessons[0] || {};
+
+  const overall = Number(latest.overall_score || s.overall || 0);
+  $("overall").textContent = Math.round(overall);
+  $("ring").style.background =
+    `conic-gradient(${colorOf(overall)} ${overall * 3.6}deg,#eef1f6 0deg)`;
+  $("headline").textContent = latest.lesson_id ? `最近一节：${fmtTime(latest.started_at)}` : "暂无课次";
+
+  $("completion").textContent = Math.round(latest.completion_score ?? s.completion ?? 0);
+  bar($("completionBar"), latest.completion_score ?? s.completion, 100, colorOf(latest.completion_score ?? s.completion));
+
+  $("mastery").textContent = Math.round(latest.mastery_score ?? s.mastery ?? 0);
+  bar($("masteryBar"), latest.mastery_score ?? s.mastery, 100, colorOf(latest.mastery_score ?? s.mastery));
+  $("level").textContent = latest.mastery_level
+    ? `当前分级：${latest.mastery_level}`
+    : "首答正确率 · 订正正确率 · 出题覆盖";
+
+  const inter = pct(latest.interaction_rate ?? s.interaction);
+  $("interaction").textContent = inter;
+  bar($("interactionBar"), inter, 100, colorOf(inter));
+  $("initiative").textContent = latest.initiative_rate != null
+    ? `主动发起占比 ${pct(latest.initiative_rate)}%`
+    : "学生发言 / 老师提问";
+
+  const authScore = Math.round(latest.authenticity_score ?? s.authenticity ?? 100);
+  $("authenticity").textContent = authScore;
+  bar($("authenticityBar"), authScore, 100, colorOf(authScore));
+
+  const flags = data.flags || [];
+  $("flags").innerHTML = flags.length
+    ? flags.map((f) => `<span class="flag">${f}</span>`).join("")
+    : '<span class="hint">暂无异常</span>';
+
+  $("lessons").innerHTML = lessons.length
+    ? lessons.map((m) => `
+      <div class="row" data-id="${m.lesson_id}">
+        <span class="t">${fmtTime(m.started_at)}</span>
+        <span class="s">${Math.round(m.overall_score)} 分</span>
+        <span class="mini"><i style="width:${Math.round(m.overall_score)}%;background:${colorOf(m.overall_score)}"></i></span>
+        <span class="hint">${m.subject || ""} · ${m.mastery_level || ""}</span>
+      </div>`).join("")
+    : '<div class="empty">还没有课次记录。上完一节课后刷新。</div>';
+
+  document.querySelectorAll(".row[data-id]").forEach((row) => {
+    row.onclick = () => loadLesson(row.dataset.id);
+  });
+}
+
+async function loadStudent() {
+  const sid = $("sid").value.trim();
+  if (!sid) { alert("请输入学生 ID"); return; }
+  $("load").disabled = true;
+  try {
+    const data = await api(`/api/learning/student/${encodeURIComponent(sid)}`);
+    renderStudent(data);
+    $("detail").classList.remove("on");
+  } catch (e) {
+    alert("加载失败：" + e.message);
+  } finally {
+    $("load").disabled = false;
+  }
+}
+
+async function loadLesson(lessonId) {
+  try {
+    const data = await api(`/api/learning/lesson/${encodeURIComponent(lessonId)}`);
+    const m = data.metrics || {};
+    const r = data.report || {};
+    const box = $("detail");
+    box.classList.add("on");
+    $("dTitle").textContent = `课后报告 · ${fmtTime(m.started_at)}`;
+    $("dHead").textContent = r.headline || "";
+    $("dKv").innerHTML = [
+      ["有效学习", `${Math.round((m.effective_seconds || 0) / 60)} 分钟`, `计划 ${Math.round((m.planned_seconds || 0) / 60)} 分钟`],
+      ["完课度", Math.round(m.completion_score || 0), `环节 ${m.phases_done}/${m.phases_planned}`],
+      ["掌握度", Math.round(m.mastery_score || 0), m.mastery_level || ""],
+      ["互动率", pct(m.interaction_rate) + "%", `主动 ${pct(m.initiative_rate)}%`],
+      ["练习", `${m.quiz_correct || 0}/${m.quiz_total || 0}`, `首答正确 ${m.quiz_first_correct || 0}`],
+      ["真实性", Math.round(m.authenticity_score ?? 100), `离场 ${m.idle_count || 0} 次`],
+    ].map(([k, v, s]) => `<div><b>${v}</b><span>${k}${s ? " · " + s : ""}</span></div>`).join("");
+    const li = (arr, empty) => (arr && arr.length ? arr.map((x) => `<li>${x}</li>`).join("") : `<li>${empty}</li>`);
+    $("dGood").innerHTML = li(r.highlights, "本项暂无突出表现");
+    $("dBad").innerHTML = li(r.improvements, "没有明显短板");
+    $("dNext").innerHTML = li(r.next_actions, "保持当前节奏");
+    $("dParent").textContent = r.parent_note || "";
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  } catch (e) {
+    alert("报告加载失败：" + e.message);
+  }
+}
+
+(function init() {
+  const user = currentUser();
+  if (user) {
+    $("who").textContent = `${user.display_name || user.username || ""}（${user.role}）`;
+    if (user.role === "student") {
+      $("sid").value = user.id;
+      $("sid").readOnly = true;
+    } else if (user.id) {
+      $("sid").value = user.id;
+    }
+  } else {
+    $("who").textContent = "未登录（仅能查看公开接口会失败，请先登录）";
+  }
+  $("load").onclick = loadStudent;
+  $("sid").addEventListener("keydown", (e) => { if (e.key === "Enter") loadStudent(); });
+  if ($("sid").value) loadStudent();
+})();
+</script>
+</body>
+</html>

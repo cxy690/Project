@@ -1,0 +1,5 @@
+{"ts": 1792676461.616, "kind": "session_start", "data": {"subject": "地理", "stage": "", "grade": ""}}
+{"ts": 1792676476.267, "kind": "student_text", "data": {"text_len": 15, "channel": "text", "initiative": true, "latency": null}}
+{"ts": 1792676478.927, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792676478.927, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792677037.622, "kind": "session_end", "data": {"reason": "disconnect"}}

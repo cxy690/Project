@@ -1,0 +1,35 @@
+{
+  "title": "光合作用的两阶段",
+  "subtitle": "高中生物 · 必修一 · 叶绿体中的能量转换",
+  "type": "flow",
+  "canvas": "portrait",
+  "theme": "light",
+  "nodes": [
+    { "id": "light", "text": "光反应", "shape": "pill" },
+    { "id": "dark", "text": "暗反应\n（碳反应）", "shape": "pill" },
+    { "id": "sugar", "text": "糖类等有机物", "shape": "box" },
+    { "id": "o2", "text": "O₂ 释放到大气", "shape": "note" }
+  ],
+  "edges": [
+    { "from": "light", "to": "dark", "label": "ATP + NADPH" },
+    { "from": "dark", "to": "sugar", "label": "CO₂ 固定" },
+    { "from": "dark", "to": "o2", "label": "水的光解", "style": "dashed" }
+  ],
+  "steps": [
+    {
+      "reveal": ["light"],
+      "narration": "光合作用分两个阶段。第一阶段是光反应，发生在叶绿体的类囊体薄膜上，必须有光才能进行。",
+      "seconds": 8
+    },
+    {
+      "reveal": ["dark"],
+      "narration": "光反应把光能转成 ATP 和 NADPH 里的活跃化学能，送到叶绿体基质，启动第二阶段——暗反应，也叫碳反应。",
+      "seconds": 9
+    },
+    {
+      "reveal": ["sugar", "o2"],
+      "narration": "暗反应把 CO₂ 固定并还原成糖类；同时水在光下分解，氧气作为副产物释放出去。能量就这样从光变成了化学能，存进有机物。",
+      "seconds": 11
+    }
+  ]
+}

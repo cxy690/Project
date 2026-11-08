@@ -1,0 +1,24 @@
+{
+  "_说明": "复制到 data/wechat/groups.json 后按实际情况改。webhook 从企业微信群机器人复制。kind=parent 是一对一家校群（可发明细），kind=class 是班级群（只发提示与班级概览，绝不发单个学生分数）。",
+  "groups": [
+    {
+      "id": "g_xiaoming_math",
+      "name": "小明家长群",
+      "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=REPLACE_ME",
+      "kind": "parent",
+      "student_ids": ["stu-1"],
+      "lesson_end": true,
+      "weekly": true
+    },
+    {
+      "id": "g_class_3a",
+      "name": "初三A班家长群",
+      "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=REPLACE_ME_TOO",
+      "kind": "class",
+      "student_ids": ["stu-1", "stu-2", "stu-7"],
+      "lesson_end": true,
+      "weekly": true,
+      "show_student_name": true
+    }
+  ]
+}

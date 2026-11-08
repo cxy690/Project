@@ -1,0 +1,3 @@
+{"ts": 1792671592.509, "kind": "session_start", "data": {"subject": "综合", "stage": "junior", "grade": "初中"}}
+{"ts": 1792671592.51, "kind": "quiz_asked", "data": {"question_id": "关于刚才讲的「三角形内角和」，下面哪种做法最有助于真正学会它？"}}
+{"ts": 1792671592.51, "kind": "phase", "data": {"phase": "interaction"}}

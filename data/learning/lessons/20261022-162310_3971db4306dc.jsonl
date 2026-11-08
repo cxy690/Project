@@ -1,0 +1,5 @@
+{"ts": 1792657390.19, "kind": "session_start", "data": {"subject": "化学", "stage": "", "grade": ""}}
+{"ts": 1792657402.206, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792657402.404, "kind": "phase", "data": {"phase": "lecture"}}
+{"ts": 1792660020.08, "kind": "quiz_asked", "data": {"question_id": "咱们说一种物质是“纯净物”，意思是啥？打个比方，就像一杯水里只装了水分子，没别的"}}
+{"ts": 1792660040.689, "kind": "phase", "data": {"phase": "interaction"}}

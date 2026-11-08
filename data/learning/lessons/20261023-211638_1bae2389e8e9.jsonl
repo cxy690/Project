@@ -1,0 +1,3 @@
+{"ts": 1792761398.162, "kind": "session_start", "data": {"subject": "数学", "stage": "", "grade": ""}}
+{"ts": 1792761404.949, "kind": "phase", "data": {"phase": "opening"}}
+{"ts": 1792761406.73, "kind": "session_end", "data": {"reason": "disconnect"}}

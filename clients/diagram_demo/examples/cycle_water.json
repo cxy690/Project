@@ -1,0 +1,37 @@
+{
+  "title": "水循环",
+  "subtitle": "地理 · 自然界的水如何周而复始",
+  "type": "cycle",
+  "canvas": "portrait",
+  "theme": "blueprint",
+  "center_text": "水在自然界\n循环不息",
+  "nodes": [
+    { "id": "evap", "text": "蒸发" },
+    { "id": "trans", "text": "植物蒸腾" },
+    { "id": "cond", "text": "凝结成云" },
+    { "id": "precip", "text": "降水" },
+    { "id": "runoff", "text": "地表径流" }
+  ],
+  "steps": [
+    {
+      "reveal": ["evap", "trans"],
+      "narration": "太阳一晒，海洋、湖泊的水变成水蒸气升空；植物也从叶片把水蒸腾出去。这一步是水循环的动力来源。",
+      "seconds": 11
+    },
+    {
+      "reveal": ["cond"],
+      "narration": "水汽上升到高空遇冷，凝结成小水滴，聚在一起就形成了云。",
+      "seconds": 7
+    },
+    {
+      "reveal": ["precip"],
+      "narration": "云里的水滴不断碰撞变大，重到空气托不住，就以雨或雪的形式落回地面。",
+      "seconds": 8
+    },
+    {
+      "reveal": ["runoff"],
+      "narration": "落到地面的水，一部分渗进土壤，一部分汇成溪流江河，最终又流回海洋——循环闭合，再次开始。",
+      "seconds": 11
+    }
+  ]
+}

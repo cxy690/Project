@@ -1,0 +1,26 @@
+{
+  "student_id": "stu-18463",
+  "updated_at": 1792727469.7753272,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 44.7,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261023-114943_7bd121b4272d",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792727383.698089,
+      "completion_score": 46.3,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 44.7,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

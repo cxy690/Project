@@ -1,0 +1,26 @@
+{
+  "student_id": "stu-71819",
+  "updated_at": 1792494108.9951804,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 18.3,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261020-190119_d629f82cfcd9",
+      "subject": "语文",
+      "stage": "",
+      "started_at": 1792494079.1357276,
+      "completion_score": 27.9,
+      "mastery_score": 0.0,
+      "interaction_rate": 0.0,
+      "authenticity_score": 85.0,
+      "overall_score": 18.3,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "student_id": "stu-52760",
+  "updated_at": 1792727960.8360822,
+  "totals": {
+    "lessons": 1,
+    "avg_overall": 46.7,
+    "avg_mastery": 0.0
+  },
+  "lessons": [
+    {
+      "lesson_id": "20261023-115110_4c058417371c",
+      "subject": "数学",
+      "stage": "",
+      "started_at": 1792727470.3330793,
+      "completion_score": 52.1,
+      "mastery_score": 0.0,
+      "interaction_rate": 1.0,
+      "authenticity_score": 85.0,
+      "overall_score": 46.7,
+      "flags": [
+        "有效学习时长不足计划的三成",
+        "未完成收尾检测（课程后段没有作答或总结）"
+      ]
+    }
+  ]
+}

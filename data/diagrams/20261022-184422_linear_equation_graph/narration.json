@@ -1,0 +1,34 @@
+{
+  "title": "二元一次方程 2x + y = 4 的图象",
+  "steps": [
+    {
+      "index": 1,
+      "file": "frames/step_01.png",
+      "reveal": [],
+      "narration": "",
+      "seconds": 5.0
+    },
+    {
+      "index": 2,
+      "file": "frames/step_02.png",
+      "reveal": [],
+      "narration": "",
+      "seconds": 5.0
+    },
+    {
+      "index": 3,
+      "file": "frames/step_03.png",
+      "reveal": [],
+      "narration": "",
+      "seconds": 5.0
+    },
+    {
+      "index": 4,
+      "file": "frames/step_04.png",
+      "reveal": [],
+      "narration": "",
+      "seconds": 5.0
+    }
+  ],
+  "total_seconds": 20.0
+}
